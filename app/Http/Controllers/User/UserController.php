@@ -42,7 +42,22 @@ class UserController extends Controller
 		/*echo __METHOD__;
 		echo '<pre>';print_r($_POST);echo '</pre>';*/
 		//exit;
-		$pwd = md5($request->input('pwd'));
+		$name = $request->input('name');
+		$new_name = UserModel::where(['name'=>$name])->first();
+//		dump($new_name);exit;
+		if($new_name){
+			exit('此用户名已存在');
+		}
+
+		$pwd = $request->input('pwd');
+		$pwd1 = $request->input('pwd1');
+		if($pwd !== $pwd1 ){
+			exit('确认密码与密码保持一致');
+		}
+		$pwd = password_hash($request->input('pwd'),PASSWORD_BCRYPT);
+		/*echo $pwd;echo '<br/>';
+		$res = password_verify($request->input('pwd'),'$2y$10$/8FuGHIhkIwi353vl0mBFOkn5AfrR03gzqwqwd8gnTcNsRcITU/QO');
+		var_dump($res);exit;*/
 		$data = [
 			'name' => $request->input('name'),
 			'pwd' => $pwd,
@@ -52,10 +67,11 @@ class UserController extends Controller
 		$id = UserModel::insert($data);
 		//var_dump($id);
 		if($id){
-			echo '注册成功';
+			setcookie('id',$id,time()+86400,'/','larvel.com',false,true);//名，值，过期时间，路径，域名，secure，httponly(默认安全true)
+			echo 'successly';
 			header("refresh:1;'/userlogin'");
 		}else{
-			echo '注册失败';
+			echo 'fail';
 		}
 	}
 
@@ -66,16 +82,40 @@ class UserController extends Controller
 	public function doLogin(Request $request){
 		//echo __METHOD__;
         $name = $request->input('name');
-        $pwd = md5($request->input('pwd'));
         $where = [
             'name' => $name,
-            'pwd' => $pwd
         ];
-        $res = UserModel::where($where)->first();
-        if($res){
-            echo '登录成功';
-        }else{
-            echo '登录失败';
-        }
+		$res = UserModel::where($where)->first();
+
+		if($res){
+			if(password_verify($request->input('pwd'),$res['pwd'])){
+				$token = substr(md5(time().mt_rand(1,99999)),10,10);
+				setcookie('id',$res['id'],time()+86400,'/','larvel.com',false,true);
+				setcookie('token',$token,time()+86400,'/user','',false,true);
+				echo 'successly';
+				header("refresh:1,url='/usercenter'");
+			}else{
+				exit('密码错误');
+			}
+		}else{
+			exit('此用户不存在');
+		}
+	}
+
+	public function center(){
+		if(empty($_COOKIE['id'])){
+			echo '请先登录';
+			header("refresh:2,url='/userlogin'");exit;
+		}else{
+			$where = [
+				'id' => $_COOKIE['id'],
+			];
+			//var_dump($where);exit;
+			$res = UserModel::where($where)->first();
+			//dump($res);exit;
+
+			return view('users.list',$res);
+			//echo 'ID:'.$_COOKIE['id'].'欢迎回来';
+		}
 	}
 }

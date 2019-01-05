@@ -56,4 +56,8 @@ Route::post('/userreg','User\UserController@doReg');
 /** 登录*/
 Route::get('/userlogin','User\UserController@login');
 Route::post('/userlogin','User\UserController@doLogin');
+Route::get('/usercenter','User\UserController@center');//
+
+/** 模板引入静态文件*/
+Route::get('/mvc/bst','Mvc\MvcController@bst');
 
