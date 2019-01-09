@@ -3,7 +3,7 @@
 @section('content')
 <form action="/userlogin" method="post" style="width: 600px; margin-left: 230px;">
     {{csrf_field()}}
-    <h3 class="form-signin-heading" style="padding-left: 240px;">User Login</h3>
+    <h2 class="form-signin-heading" style="padding-left: 240px;">User Login</h2>
     <div class="form-group">
         <label for="exampleInputEmail1">NickName</label>
         <input type="text" class="form-control" name="name" placeholder="Nickname" required>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Model\Goods;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -91,7 +92,11 @@ class UserController extends Controller
 			if(password_verify($request->input('pwd'),$res['pwd'])){
 				$token = substr(md5(time().mt_rand(1,99999)),10,10);
 				setcookie('id',$res['id'],time()+86400,'/','larvel.com',false,true);
-				setcookie('token',$token,time()+86400,'/user','',false,true);
+				setcookie('token',$token,time()+86400,'/','',false,true);
+
+				$request->session()->put('u_token',$token);
+				$request->session()->put('uid',$res['id']);
+
 				echo 'successly';
 				header("refresh:1,url='/usercenter'");
 			}else{
@@ -102,7 +107,13 @@ class UserController extends Controller
 		}
 	}
 
-	public function center(){
+	public function center(Request $request){
+		/*if($_COOKIE['token']!=$request->session()->get('u_token')){
+			exit("非法请求");
+		}else{
+			echo '正常请求';
+		}*/
+//		echo 'u_token: '.$request->session()->get('u_token'); echo '</br>';
 		if(empty($_COOKIE['id'])){
 			echo '请先登录';
 			header("refresh:2,url='/userlogin'");exit;
@@ -110,12 +121,12 @@ class UserController extends Controller
 			$where = [
 				'id' => $_COOKIE['id'],
 			];
-			//var_dump($where);exit;
-			$res = UserModel::where($where)->first();
-			//dump($res);exit;
+		//var_dump($where);exit;
+			UserModel::where($where)->first();
+			//print_r($res);exit;
+			echo 'ID:'.$_COOKIE['id'].'欢迎回来';
 
-			return view('users.list',$res);
-			//echo 'ID:'.$_COOKIE['id'].'欢迎回来';
+
 		}
 	}
 }

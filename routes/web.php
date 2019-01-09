@@ -61,3 +61,15 @@ Route::get('/usercenter','User\UserController@center');//
 /** 模板引入静态文件*/
 Route::get('/mvc/bst','Mvc\MvcController@bst');
 
+/**  Test*/
+Route::get('/test/check_cookie','Test\TestController@checkCookie')->middleware('check.cookie');//中间件测试
+
+/** 购物车*/
+Route::get('/cart','Cart\IndexController@index')->middleware('check.login');
+Route::get('/cart/add/{goods_id}','Cart\IndexController@addGoods')->middleware('check.login');//添加商品进入购物车
+Route::post('/cart/add2','Cart\IndexController@add2')->middleware('check.login');//添加商品进入购物车
+Route::get('cart/del/{goods_id}','Cart\IndexController@delGoods')->middleware('check.login');//删除购物车内的商品
+Route::get('cart/del2/{goods_id}','Cart\IndexController@del2')->middleware('check.login');//删除购物车内的商品
+
+Route::get('/goods','Goods\IndexController@index');//商品展示
+Route::get('/goods/detail/{goods_id}','Goods\IndexController@detail');//商品详情

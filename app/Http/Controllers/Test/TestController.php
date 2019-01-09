@@ -11,7 +11,6 @@ use DB;
 class TestController extends Controller
 {
     //
-
     public function abc()
     {
         var_dump($_POST);echo '</br>';
@@ -71,4 +70,11 @@ class TestController extends Controller
 		];
 		return view('test.child',$data);
 	}
+
+	/**	 中间件测试*/
+	public function checkCookie(){
+		echo __METHOD__;
+	}
+
+
 }
