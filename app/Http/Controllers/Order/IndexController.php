@@ -62,7 +62,14 @@ class IndexController extends Controller
             return view('order.orderlist',$arr);
         }
     }
-    public function del(){
-
+    public function del($order_number){
+        $order_data = Order::where(['uid' =>session()->get('uid'),'order_number' => $order_number])->delete();
+//        print_r($order_data);exit;
+        if($order_data){
+            echo 'successly';
+            header("refresh:2;url='/order/list'");
+        }else{
+            echo 'fail';
+        }
     }
 }

@@ -77,3 +77,4 @@ Route::get('/goods/detail/{goods_id}','Goods\IndexController@detail');//商品�
 Route::get('/order','Order\IndexController@index')->middleware('check.login');//结算
 Route::get('/order/add','Order\IndexController@add')->middleware('check.login');//结算
 Route::get('/order/list','Order\IndexController@orderlist')->middleware('check.login');//订单详情
+Route::get('/order/del/{order_number}','Order\IndexController@del')->middleware('check.login');//删除订单
