@@ -17,7 +17,7 @@
                 <td>{{$v['order_number']}}</td>
                 <td>￥{{$v['order_amount']/100}}</td>
                 <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
-                <td><a href="/pay/{oid}">去支付</a>||<a href="/order/del/{{$v['order_number']}}">取消订单</a></td>
+                <td><a href="/pay/{id}">去支付</a>||<a href="/order/del/{{$v['order_number']}}">取消订单</a></td>
             </tr>
         @endforeach
     </table>
