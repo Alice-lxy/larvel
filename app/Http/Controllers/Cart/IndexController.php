@@ -91,6 +91,19 @@ class IndexController extends Controller
             ];
             return $response;
         }
+        //商品加入购物车的唯一性
+        $cart_goods = CartModel::where(['uid'=>$this->uid])->get()->toArray();
+        if($cart_goods){
+            $goods_arr = array_column($cart_goods,'goods_id');
+            if(in_array($goods_id,$goods_arr)){
+                $response = [
+                    'errno' => 5002,
+                    'msg' => '此商品已存在'
+                ];
+                return $response;
+            }
+        }
+
         //写入购物车表内
         $data = [
             'goods_id' => $goods_id,
@@ -136,7 +149,6 @@ class IndexController extends Controller
                 exit('该商品不在购物车内...');
             }
         }
-
     }
 
     /*

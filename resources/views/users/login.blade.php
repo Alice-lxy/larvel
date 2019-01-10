@@ -1,6 +1,7 @@
 @extends('layout.bst')
 
 @section('content')
+
 <form action="/userlogin" method="post" style="width: 600px; margin-left: 230px;">
     {{csrf_field()}}
     <h2 class="form-signin-heading" style="padding-left: 240px;">User Login</h2>

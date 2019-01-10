@@ -73,3 +73,7 @@ Route::get('cart/del2/{goods_id}','Cart\IndexController@del2')->middleware('chec
 
 Route::get('/goods','Goods\IndexController@index');//商品展示
 Route::get('/goods/detail/{goods_id}','Goods\IndexController@detail');//商品详情
+
+Route::get('/order','Order\IndexController@index')->middleware('check.login');//结算
+Route::get('/order/add','Order\IndexController@add')->middleware('check.login');//结算
+Route::get('/order/list','Order\IndexController@orderlist')->middleware('check.login');//订单详情

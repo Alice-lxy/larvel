@@ -10,8 +10,7 @@
                 <td>Goods Name</td>
                 <td>Goods Price</td>
                 <td>Buy Num</td>
-                {{--<td>添加时间</td>--}}
-                <td>操作</td>
+                <td>Operation</td>
             </tr>
             @foreach($arr as $v)
                 <tr>
@@ -19,10 +18,14 @@
                     <td>{{$v['goods_name']}}</td>
                     <td>{{$v['price']}}</td>
                     <td>{{$v['num']}}</td>
-                    {{--<td>{{$v['add_time']}}</td>--}}
                     <td><a href="/cart/del2/{{$v['goods_id']}}">删除此商品</a></td>
                 </tr>
             @endforeach
+            <tr>
+                <td colspan="5" align="right">
+                    <a href="/order/add" class="btn btn-info">结算</a>
+                </td>
+            </tr>
         </table>
     </form>
 @endsection
