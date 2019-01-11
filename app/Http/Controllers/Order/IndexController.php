@@ -51,7 +51,7 @@ class IndexController extends Controller
         }
     }
     public function orderlist(){
-        $order_data = Order::where(['uid'=>session()->get('uid')])->get()->toArray();
+        $order_data = Order::where(['uid'=>session()->get('uid'),'is_delete'=>1])->get()->toArray();
         if(empty($order_data)){
             exit('无订单信息...请选择商品结算');
         }else{
@@ -63,7 +63,7 @@ class IndexController extends Controller
         }
     }
     public function del($order_number){
-        $order_data = Order::where(['uid' =>session()->get('uid'),'order_number' => $order_number])->delete();
+        $order_data = Order::where(['uid' =>session()->get('uid'),'order_number' => $order_number])->update(['is_delete'=>2]);
 //        print_r($order_data);exit;
         if($order_data){
             echo 'successly';

@@ -65,12 +65,18 @@ class UserController extends Controller
 			'age' => $request->input('age'),
 			'email' => $request->input('email')
 		];
-		$id = UserModel::insert($data);
+		$id = UserModel::insertGetId($data);
 		//var_dump($id);
 		if($id){
 			setcookie('id',$id,time()+86400,'/','larvel.com',false,true);//名，值，过期时间，路径，域名，secure，httponly(默认安全true)
+			$token = substr(md5(time().mt_rand(1,99999)),10,10);
+			$request->session()->put('u_token',$token);
+			$request->session()->put('uid',$id);
+
+			$request->session()->put('name',$id['name']);
+
 			echo 'successly';
-			header("refresh:1;'/userlogin'");
+			header("refresh:1;'/usercenter'");
 		}else{
 			echo 'fail';
 		}
@@ -108,11 +114,14 @@ class UserController extends Controller
 	}
 
 	public function center(Request $request){
-		/*if($_COOKIE['token']!=$request->session()->get('u_token')){
-			exit("非法请求");
-		}else{
-			echo '正常请求';
-		}*/
+		if(!empty($_COOKIE['token'])){
+			if($_COOKIE['token']!=$request->session()->get('u_token')){
+				exit("非法请求");
+			}else{
+				echo '正常请求';
+			}
+		}
+
 //		echo 'u_token: '.$request->session()->get('u_token'); echo '</br>';
 		if(empty($_COOKIE['id'])){
 			echo '请先登录';
@@ -125,8 +134,11 @@ class UserController extends Controller
 			UserModel::where($where)->first();
 			//print_r($res);exit;
 			echo 'ID:'.$_COOKIE['id'].'欢迎回来';
-
-
 		}
+	}
+	/**	退出*/
+	public function quit(){
+		session()->pull('u_token',null);
+		header("refresh:0.2;url='/userlogin'");
 	}
 }

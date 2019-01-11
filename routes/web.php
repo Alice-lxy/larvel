@@ -56,7 +56,9 @@ Route::post('/userreg','User\UserController@doReg');
 /** 登录*/
 Route::get('/userlogin','User\UserController@login');
 Route::post('/userlogin','User\UserController@doLogin');
-Route::get('/usercenter','User\UserController@center');//
+Route::get('/usercenter','User\UserController@center')->middleware('check.login');//
+/** 退出*/
+Route::get('/userquit','User\UserController@quit');
 
 /** 模板引入静态文件*/
 Route::get('/mvc/bst','Mvc\MvcController@bst');
@@ -78,3 +80,5 @@ Route::get('/order','Order\IndexController@index')->middleware('check.login');//
 Route::get('/order/add','Order\IndexController@add')->middleware('check.login');//结算
 Route::get('/order/list','Order\IndexController@orderlist')->middleware('check.login');//订单详情
 Route::get('/order/del/{order_number}','Order\IndexController@del')->middleware('check.login');//删除订单
+
+Route::get('/pay/{order_number}','Pay\IndexController@pay')->middleware('check.login');//支付订单

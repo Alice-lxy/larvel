@@ -39,7 +39,8 @@ class IndexController extends Controller
         $cart_goods = CartModel::where(['uid'=>$this->uid])->get()->toArray();
 //        print_r($cart_goods);exit;
         if(empty($cart_goods)){
-            exit('cart 空空如也...');
+            header("refresh:3;url='/goods'");
+            exit('cart 空空如也...正在进入商品页面...');
         }else{
             foreach($cart_goods as $v){
                 $goods_info = Goods::where(['goods_id'=>$v['goods_id']])->first()->toArray();
