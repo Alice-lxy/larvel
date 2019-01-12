@@ -76,7 +76,7 @@ class UserController extends Controller
 			$request->session()->put('name',$id['name']);
 
 			echo 'successly';
-			header("refresh:1;'/usercenter'");
+			header("refresh:1;'/cart'");
 		}else{
 			echo 'fail';
 		}
@@ -104,7 +104,7 @@ class UserController extends Controller
 				$request->session()->put('uid',$res['id']);
 
 				echo 'successly';
-				header("refresh:1,url='/usercenter'");
+				header("refresh:1,url='/cart'");
 			}else{
 				exit('密码错误');
 			}
