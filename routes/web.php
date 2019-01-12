@@ -82,3 +82,7 @@ Route::get('/order/list','Order\IndexController@orderlist')->middleware('check.l
 Route::get('/order/del/{order_number}','Order\IndexController@del')->middleware('check.login');//删除订单
 
 Route::get('/pay/{order_number}','Pay\IndexController@pay')->middleware('check.login');//支付订单
+
+Route::get('/pay','Pay\IndexController@pay1');
+
+

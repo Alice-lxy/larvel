@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pay;
 use App\Model\Goods;
 use App\Model\Order;
 use App\Model\UserModel;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,18 @@ class IndexController extends Controller
     {
         echo __METHOD__;
     }
+
+    public function pay1(){
+        $url='http://lxy.qianqianya.xyz';
+        $client=new Client([
+            'base_uri'=>$url,
+            'timeout'=>2.0,
+        ]);
+
+        $response=$client->request('GET','index.php');
+        echo $response->getBody();
+    }
+
     public function pay($order_number){
         //查询订单账号
         $order_info = Order::where(['order_number'=>$order_number])->first()->toArray();
