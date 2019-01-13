@@ -18,7 +18,7 @@
                 <td>￥{{$v['order_amount']/100}}</td>
                 <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
                 <td>   @if($v['order_status']==1)
-                        <a href="/pay/{{$v['order_number']}}">去支付</a>  ||
+                        <a href="/pay/alipay/test">去支付</a>  ||
                         <a href="/order/del/{{$v['order_number']}}">取消订单</a>
                     @elseif($v['order_status']==2)
                         <a href="javascript:;">查看物流</a>  ||

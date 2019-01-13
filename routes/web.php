@@ -85,4 +85,9 @@ Route::get('/pay/{order_number}','Pay\IndexController@pay')->middleware('check.l
 
 Route::get('/pay','Pay\IndexController@pay1');
 
+Route::get('/pay/alipay/test','Pay\AlipayController@test');
+Route::post('/pay/alipay/notify','Pay\AlipayController@notify');        //支付宝支付 通知回调
+
+
+
 
