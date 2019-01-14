@@ -53,7 +53,7 @@ class IndexController extends Controller
             $new_integral = $integral + $pay_price;
             UserModel::where(['id'=>session()->get('uid')])->update(['integral'=>$new_integral]);
             echo '支付成功';
-            header("refresh:3;url='/pay/alipay/test'");
+            header("refresh:0.1;url='/pay/alipay/test'");
         }else{
             echo '支付失败';
         }
