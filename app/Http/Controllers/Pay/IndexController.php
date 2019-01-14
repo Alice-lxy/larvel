@@ -45,9 +45,10 @@ class IndexController extends Controller
         //支付成功 修改
         $res = Order::where(['order_number'=>$order_number])->update(['pay_time'=>time(),'order_status'=>2,'pay_price'=>rand(111,222)]);
        // print_r($res);exit;
-
+        header("refresh:0.1;url='/pay/alipay/test'");
+        echo '正在跳往支付页面...';
         //增加消费积分
-        if($res){
+       /* if($res){
             $integral = UserModel::where(['id'=>session()->get('uid')])->value('integral');
             $pay_price = Order::where(['uid' => session()->get('uid')])->value('pay_price');
             $new_integral = $integral + $pay_price;
@@ -56,6 +57,6 @@ class IndexController extends Controller
             header("refresh:0.1;url='/pay/alipay/test'");
         }else{
             echo '支付失败';
-        }
+        }*/
     }
 }
