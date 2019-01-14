@@ -30,7 +30,7 @@ class IndexController extends Controller
 
     public function pay($order_number){
         //查询订单账号
-        $order_info = Order::where(['order_number'=>$order_number])->first()->toArray();
+        $order_info = Order::where(['order_number'=>$order_number])->first();
         if(empty($order_info)){
             exit('无此订单号...请选择正确订单信息进行结算');
         }
@@ -53,7 +53,7 @@ class IndexController extends Controller
             $new_integral = $integral + $pay_price;
             UserModel::where(['id'=>session()->get('uid')])->update(['integral'=>$new_integral]);
             echo '支付成功';
-            header("refresh:3;url='/order/list'");
+            header("refresh:3;url='/pay/alipay/test'");
         }else{
             echo '支付失败';
         }
