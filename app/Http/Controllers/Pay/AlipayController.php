@@ -273,7 +273,7 @@
             foreach($data as $k=>$v){
                 //未支付
                 if($v['order_status']==1){
-                    if(time()-$v['add_time']>60){
+                    if(time()-$v['add_time']>300){
                         $del = Order::where(['id'=>$v['id']])->update(['is_delete'=>2]);
                     }
                 }
