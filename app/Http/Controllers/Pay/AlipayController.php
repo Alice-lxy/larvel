@@ -199,6 +199,20 @@
                 file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
             }
 
+            //验证订单的交易状态
+            if($_POST['trade_status']=='TRADE_SUCCESS'){
+                //更新订单状态
+                $order_number = $_POST['out_trade_no'];     //商户订单号
+                $info = [
+                    'order_status'        => 2,       //支付状态  1未支付 2已支付
+                    'pay_price'    => $_POST['total_amount'] * 100,    //支付金额
+                    'pay_time'      => strtotime($_POST['gmt_payment']), //支付时间
+                    'plat_oid'      => $_POST['trade_no'],      //支付宝订单号
+                    'plat'          => 1,      //平台编号 1支付宝 2微信
+                ];
+
+                Order::where(['order_number'=>$order_number])->update($info);
+            }
             //处理订单逻辑
             $this->dealOrder($_POST);
 
