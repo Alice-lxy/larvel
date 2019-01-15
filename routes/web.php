@@ -90,5 +90,7 @@ Route::get('/pay/alipay/test/{order_number}','Pay\AlipayController@test')->middl
 Route::post('/pay/alipay/notify','Pay\AlipayController@aliNotify');        //支付宝支付 通知回调
 Route::get('/pay/alipay/return','Pay\AlipayController@aliReturn');        //支付宝支付 同步通知回调
 
+Route::get('/pay/alipay/orderdel','Pay\AlipayController@orderDel');
+
 
 

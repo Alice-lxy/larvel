@@ -263,5 +263,23 @@
             //减库存
 
         }
+
+
+        /*删除所有失效的订单
+         * */
+        public function orderDel(){
+            $data = Order::get()->toArray();
+            //print_r($data);exit;
+            foreach($data as $k=>$v){
+                //未支付
+                if($v['order_status']==1){
+                    if(time()-$v['add_time']>60){
+                        $del = Order::where(['id'=>$v['id']])->update(['is_delete'=>2]);
+                    }
+                }
+            }
+            //print_r($del);exit;
+            echo date('Y-m-d H:i:s')."执行 deleteOrder\n\n";
+        }
     }
 ?>
