@@ -41,12 +41,12 @@ class IndexController extends Controller
         }
         //支付宝支付
 
-
-        //支付成功 修改
-        $res = Order::where(['order_number'=>$order_number])->update(['pay_time'=>time(),'order_status'=>2,'pay_price'=>rand(111,222)]);
-       // print_r($res);exit;
-        header("refresh:0.1;url='/pay/alipay/test'");
+        header("refresh:0.1;url='/pay/alipay/test/$order_number'");
         echo '正在跳往支付页面...';
+        //支付成功 修改
+        //$res = Order::where(['order_number'=>$order_number])->update(['pay_time'=>time(),'order_status'=>2,'pay_price'=>rand(111,222)]);
+       // print_r($res);exit;
+
         //增加消费积分
        /* if($res){
             $integral = UserModel::where(['id'=>session()->get('uid')])->value('integral');

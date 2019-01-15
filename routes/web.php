@@ -74,7 +74,7 @@ Route::get('cart/del/{goods_id}','Cart\IndexController@delGoods')->middleware('c
 Route::get('cart/del2/{goods_id}','Cart\IndexController@del2')->middleware('check.login');//删除购物车内的商品
 
 Route::get('/goods','Goods\IndexController@index');//商品展示
-Route::get('/goods/detail/{goods_id}','Goods\IndexController@detail');//商品详情
+Route::get('/goods/detail/{goods_id}','Goods\IndexController@detail')->middleware('check.login');//商品详情
 
 Route::get('/order','Order\IndexController@index')->middleware('check.login');//结算
 Route::get('/order/add','Order\IndexController@add')->middleware('check.login');//结算
@@ -85,9 +85,10 @@ Route::get('/pay/{order_number}','Pay\IndexController@pay')->middleware('check.l
 
 Route::get('/pay','Pay\IndexController@pay1');
 
-Route::get('/pay/alipay/test','Pay\AlipayController@test');
+Route::get('/pay/alipay/test/{order_number}','Pay\AlipayController@test')->middleware('check.login');
+//Route::get('/pay/{id}','Pay\AlipayController@pay')->middleware('check.login');
 Route::post('/pay/alipay/notify','Pay\AlipayController@notify');        //支付宝支付 通知回调
-
+Route::get('/pay/alipay/return','Pay\AlipayController@aliReturn');        //支付宝支付 同步通知回调
 
 
 
