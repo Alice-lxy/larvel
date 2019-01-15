@@ -87,7 +87,7 @@ Route::get('/pay','Pay\IndexController@pay1');
 
 Route::get('/pay/alipay/test/{order_number}','Pay\AlipayController@test')->middleware('check.login');
 //Route::get('/pay/{id}','Pay\AlipayController@pay')->middleware('check.login');
-Route::post('/pay/alipay/notify','Pay\AlipayController@notify');        //支付宝支付 通知回调
+Route::post('/pay/alipay/notify','Pay\AlipayController@aliNotify');        //支付宝支付 通知回调
 Route::get('/pay/alipay/return','Pay\AlipayController@aliReturn');        //支付宝支付 同步通知回调
 
 
