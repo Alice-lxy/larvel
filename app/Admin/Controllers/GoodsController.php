@@ -128,6 +128,7 @@ class GoodsController extends Controller
         $form->number('store', 'Store');
         $form->number('cart_id', 'Cart id');
         $form->currency('price', 'Price');
+        $form->ckeditor('content');
         return $form;
     }
 }
