@@ -13,6 +13,11 @@ class IndexController extends Controller
     public function index(){
         echo __METHOD__;
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function add(){
         //查询购物车的商品
         $cart_goods = CartModel::where(['uid'=>session()->get('uid')])->get()->toArray();
