@@ -94,3 +94,11 @@ Route::get('/pay/alipay/orderdel','Pay\AlipayController@orderDel');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
