@@ -92,7 +92,9 @@ Route::get('/pay/alipay/return','Pay\AlipayController@aliReturn');        //支�
 
 Route::get('/pay/alipay/orderdel','Pay\AlipayController@orderDel');
 
-
+///上传文件
+Route::get('/upload','Goods\IndexController@uploadIndex');
+Route::post('/upload/pdf','Goods\IndexController@uploadPDF');
 
 
 Auth::routes();

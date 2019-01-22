@@ -30,4 +30,22 @@ class IndexController extends Controller
         ];
         return view('goods.detail',$data);
     }
+    /** 上传文件*/
+    public function uploadIndex(){
+        return view('goods.upload');
+    }
+    public function uploadPDF(Request $request){
+        //print_r($_FILES);
+        $pdf = $request->file('pdf');
+        $is_pdf = $pdf->extension();
+        //print_r($is_pdf);exit;
+        if($is_pdf != 'pdf'){
+            exit('请上传正确格式的文件');
+        }
+        //print_r($pfd);
+        $res = $pdf->storeAs(date('Ymd'),str_random(4). '.pdf');
+        if($res){
+            echo 'successly';
+        }
+    }
 }
