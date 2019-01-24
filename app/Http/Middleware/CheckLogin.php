@@ -17,7 +17,7 @@ class CheckLogin
     {
         $taken = $request->session()->get('u_token');
         if(!$taken){
-            header("refresh:2;url='/exam/login'");
+            header("refresh:2;url='/userlogin'");
             echo '请先登录';exit;
         }
         return $next($request);
