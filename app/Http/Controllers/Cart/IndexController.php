@@ -165,5 +165,4 @@ class IndexController extends Controller
             echo 'fail';
         }
     }
-
 }
