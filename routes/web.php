@@ -95,6 +95,12 @@ Route::get('/pay/alipay/orderdel','Pay\AlipayController@orderDel');
 ///上传文件
 Route::get('/upload','Goods\IndexController@uploadIndex');
 Route::post('/upload/pdf','Goods\IndexController@uploadPDF');
+//微信
+Route::get('/weixin/test','Weixin\WeixinController@test');
+Route::get('/weixin/valid','Weixin\WeixinController@validToken');
+Route::get('/weixin/valid1','Weixin\WeixinController@validToken1');
+Route::post('/weixin/valid1','Weixin\WeixinController@wxEvent');        //接收微信服务器事件推送
+Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 
 
 Auth::routes();
@@ -112,3 +118,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
