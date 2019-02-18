@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use App\Model\WeixinUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -71,9 +72,25 @@ class WeixinController extends Controller
 
             //获取用户信息
             $user_info = $this->getUserInfo($openid);
-            echo '<pre>';
-            print_r($user_info);
-            echo '</pre>';
+            echo '<pre>';print_r($user_info);echo '</pre>';
+
+            //保存用户信息
+            $u = WeixinUser::where(['openid'=>$openid])->first();
+
+            if($u){
+                echo '此用户不存在';
+            }else{
+                $user_data = [
+                    'openid' => $openid,
+                    'add_time' => time(),
+                    'nickname' => $user_info['nickname'],
+                    'sex' => $user_info['sex'],
+                    'headimgurl' => $user_info['headimgurl'],
+                    'subscribe_time' => $sub_time,
+                ];
+                $id = WeixinUser::insertGetId($user_data);      //保存用户信息
+                var_dump($id);
+            }
         }
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
