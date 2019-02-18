@@ -53,7 +53,7 @@ class WeixinController extends Controller
 
             //获取用户信息
             $user_info = $this->getUserInfo($openid);
-            echo '<pre>';print_r($user_info);
+            //echo '<pre>';print_r($user_info);
 
         }
         $xml = simplexml_load_string($data);        //将 xml字符串 转换成对象
@@ -78,7 +78,7 @@ class WeixinController extends Controller
             $u = WeixinUser::where(['openid'=>$openid])->first();
 
             if($u){
-                echo '此用户不存在';
+                echo '此用户已存在';
             }else{
                 $user_data = [
                     'openid' => $openid,
