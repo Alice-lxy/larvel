@@ -40,22 +40,6 @@ class WeixinController extends Controller
         $data = file_get_contents("php://input");
 
         //解析XML
-        $xml = simplexml_load_string($data);    //将xml对象  转化成字符串
-
-        $event = $xml->Event;
-
-        if($event == 'subscribe'){
-            $openid = $xml->FromUserName;
-            $sub_time = $xml->CreateTime;
-
-            echo 'openid:'.$openid;echo '</br>';
-            echo '$sub_time:' .$sub_time;
-
-            //获取用户信息
-            $user_info = $this->getUserInfo($openid);
-            //echo '<pre>';print_r($user_info);
-
-        }
         $xml = simplexml_load_string($data);        //将 xml字符串 转换成对象
 
         $event = $xml->Event;                       //事件类型
