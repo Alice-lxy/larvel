@@ -65,7 +65,7 @@ class WeixinController extends Controller
                     echo $xml_response;
                 }
             }
-            //exit();
+            exit();
         }
 
         //判断事件类型
