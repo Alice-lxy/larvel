@@ -145,7 +145,7 @@ class WeixinController extends Controller
 
         $data = [
             "button"    =>[
-                [
+              /*  [
                     "name"  =>  "菜单",
                     "sub_button"    =>  [
                         [
@@ -159,22 +159,17 @@ class WeixinController extends Controller
                             "url"       =>  "https://www.jd.com"
                         ]
                     ],
-                ],
-                /*[
+                ],*/
+                [
                     "type"      =>  "view",             // view类型 跳转指定 URL
                     "name"      =>  "百度",
                     "url"       =>  "https://www.baidu.com"
                 ],
                 [
-                    "name"      =>  "菜单",
-                    "sub_button"    =>[
-                        [
-                            "type"      =>  "view",             // view类型 跳转指定 URL
-                            "name"      =>  "水滴叮咚水滴",
-                            "url"       =>  "https://www.jd.com"
-                        ],
-                    ],
-                ]*/
+                    "type"      =>  "view",             // view类型 跳转指定 URL
+                    "name"      =>  "水滴叮咚水滴",
+                    "url"       =>  "https://www.jd.com"
+                ],
             ]
         ];
         $r = $client->request('POST',$url,[
