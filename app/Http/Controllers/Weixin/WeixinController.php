@@ -150,11 +150,11 @@ class WeixinController extends Controller
                     "name"  => "百度",
                     "url"   => "https://www.baidu.com"
                 ],
-                [
+                /*[
                     "type"  => "view",      // view类型 跳转指定 URL
                     "name"  => "京东",
                     "url"   => "https://www.jd.com"
-                ]
+                ]*/
             ]
         ];
 
