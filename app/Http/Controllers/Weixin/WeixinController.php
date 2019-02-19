@@ -144,34 +144,21 @@ class WeixinController extends Controller
         $client = new GuzzleHttp\Client(['base_uri' => $url]);
 
         $data = [
-            "button"    =>[
-              /*  [
-                    "name"  =>  "菜单",
-                    "sub_button"    =>  [
-                        [
-                            "type"      =>  "view",             // view类型 跳转指定 URL
-                            "name"      =>  "百度",
-                            "url"       =>  "https://www.baidu.com"
-                        ],
-                        [
-                            "type"      =>  "view",             // view类型 跳转指定 URL
-                            "name"      =>  "水滴叮咚水滴",
-                            "url"       =>  "https://www.jd.com"
-                        ]
-                    ],
-                ],*/
+            "button"    => [
                 [
-                    "type"      =>  "view",             // view类型 跳转指定 URL
-                    "name"      =>  "百度",
-                    "url"       =>  "https://www.baidu.com"
+                    "type"  => "view",      // view类型 跳转指定 URL
+                    "name"  => "百度",
+                    "url"   => "https://www.baidu.com"
                 ],
                 [
-                    "type"      =>  "view",             // view类型 跳转指定 URL
-                    "name"      =>  "水滴叮咚水滴",
-                    "url"       =>  "https://www.jd.com"
-                ],
+                    "type"  => "view",      // view类型 跳转指定 URL
+                    "name"  => "京东",
+                    "url"   => "https://www.jd.com"
+                ]
             ]
         ];
+
+
         $r = $client->request('POST',$url,[
            'body' => json_encode($data)
         ]);
