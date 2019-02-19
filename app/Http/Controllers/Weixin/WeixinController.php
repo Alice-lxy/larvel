@@ -44,6 +44,8 @@ class WeixinController extends Controller
         $xml = simplexml_load_string($data);        //将 xml字符串 转换成对象
 
         $event = $xml->Event;                       //事件类型
+        $openid = $xml->FromUserName;
+
         //var_dump($xml);echo '<hr>';
 
         if($event=='subscribe') {
@@ -51,9 +53,7 @@ class WeixinController extends Controller
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
 
-            echo 'openid: ' . $openid;
-            echo '</br>';
-            echo '$sub_time: ' . $sub_time;
+            echo 'openid: ' . $openid;echo '</br>';echo '$sub_time: ' . $sub_time;
 
             //获取用户信息
             $user_info = $this->getUserInfo($openid);
@@ -76,11 +76,20 @@ class WeixinController extends Controller
                 $id = WeixinUser::insertGetId($user_data);      //保存用户信息
                 var_dump($id);
             }
+        }elseif($event=='CLICK'){
+            if($xml->EventKey=="kefu001"){
+                $this->kefu001($openid,$xml->ToUserName);
+            }
         }
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
     }
 
+
+    public function kefu001($openid,$from){
+        $xml_response ='<xml> <ToUserName>< ![CDATA['.$openid.'] ]></ToUserName> <FromUserName>< ![CDATA['.$from.'] ]></FromUserName> <CreateTime>'.time().'</CreateTime> <MsgType>< ![CDATA[text] ]></MsgType> <Content>< ![CDATA['.'你好,现在是世界末日'.'] ]></Content> </xml>';
+        echo $xml_response;
+    }
 
 
 
@@ -147,8 +156,8 @@ class WeixinController extends Controller
             "button"    => [
                 [
                     "type"  =>  "click",
-                    "name"  =>  "今日歌曲",
-                    "key"   =>  "V1001_TODAY_MUSIC"
+                    "name"  =>  "客服SK",
+                    "key"   =>  "kefu001"
                 ],
                 [
                     "name"  =>"菜单",
