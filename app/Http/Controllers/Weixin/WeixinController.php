@@ -146,6 +146,11 @@ class WeixinController extends Controller
         $data = [
             "button"    => [
                 [
+                    "type"  =>  "click",
+                    "name"  =>  "今日歌曲",
+                    "key"   =>  "V1001_TODAY_MUSIC"
+                ],
+                [
                     "name"  =>"菜单",
                     "sub_button"    => [
                         [
@@ -155,8 +160,23 @@ class WeixinController extends Controller
                         ],
                         [
                             "type"  => "view",      // view类型 跳转指定 URL
-                            "name"  => "京东",
-                            "url"   => "https://www.jd.com"
+                            "name"  => "搜索",
+                            "url"   => "https://www.soso.com"
+                        ]
+                    ]
+                ],
+                [
+                    "name"  =>"shopping",
+                    "sub_button"    => [
+                        [
+                            "type"  => "view",      // view类型 跳转指定 URL
+                            "name"  => "淘宝",
+                            "url"   => "https://www.taobao.com/"
+                        ],
+                        [
+                            "type"  => "view",      // view类型 跳转指定 URL
+                            "name"  => "天猫",
+                            "url"   => "https://www.tmall.com"
                         ]
                     ]
                 ]
