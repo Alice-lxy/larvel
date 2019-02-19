@@ -147,9 +147,17 @@ class WeixinController extends Controller
             "button"    =>[
                 [
                     "type"      =>  "view",             // view类型 跳转指定 URL
-                    "name"      =>  "Lening-lxy",
+                    "name"      =>  "百度",
                     "url"       =>  "https://www.baidu.com"
+                ],
+                [
+                    "type"      =>  "view",             // view类型 跳转指定 URL
+                    "name"      =>  "水滴叮咚水滴",
+                    "url"       =>  "https://www.jd.com"
                 ]
+
+
+
             ],
         ];
         $r = $client->request('POST',$url,[
@@ -161,7 +169,7 @@ class WeixinController extends Controller
         //print_r($response_arr);
 
         if($response_arr['errcode'] == 0){
-            echo '菜单创建成功';
+            echo "菜单创建成功";
         }else{
             echo "菜单创建失败，请重试";echo '</br>';
             echo $response_arr['errmsg'];
