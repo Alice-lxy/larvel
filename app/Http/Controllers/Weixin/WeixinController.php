@@ -158,11 +158,6 @@ class WeixinController extends Controller
                             "name"      =>  "水滴叮咚水滴",
                             "url"       =>  "https://www.jd.com"
                         ],
-                        [
-                            "type"      =>  "view",             // view类型 跳转指定 URL
-                            "name"      =>  "搜索",
-                            "url"       =>  "https://www.soso.com"
-                        ],
                     ],
                 ]
             ],
