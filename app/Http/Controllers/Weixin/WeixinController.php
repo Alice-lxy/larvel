@@ -88,7 +88,7 @@ class WeixinController extends Controller
     public function kefu001($openid,$from)
     {
         // 文本消息
-        $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$from.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. 'Hello World, 现在时间'. date('Y-m-d H:i:s') .']]></Content></xml>';
+        $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$from.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. '您好, 现在是北京时间'. date('Y-m-d H:i:s') .']]></Content></xml>';
         echo $xml_response;
     }
 
@@ -160,7 +160,7 @@ class WeixinController extends Controller
                     "name"  =>  "客服SK",
                     "key"   =>  "kefu001"
                 ],
-                /*[
+                [
                     "name"  =>"菜单",
                     "sub_button"    => [
                         [
@@ -189,7 +189,7 @@ class WeixinController extends Controller
                             "url"   => "https://www.tmall.com"
                         ]
                     ]
-                ]*/
+                ]
             ]
         ];
 
