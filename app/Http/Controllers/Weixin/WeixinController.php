@@ -33,6 +33,8 @@ class WeixinController extends Controller
         echo $_GET['echostr'];
     }
 
+
+
     /**
      * 接收微信服务器事件推送
      */
@@ -45,9 +47,19 @@ class WeixinController extends Controller
 
         $event = $xml->Event;                       //事件类型
         $openid = $xml->FromUserName;
-
         //var_dump($xml);echo '<hr>';
 
+
+        //处理XML
+        if(isset($xml->MegType)){
+            if($xml->MsgType=='text'){
+                $msg = $xml->Content;
+                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$msg. date('Y-m-d H:i:s') .']]></Content></xml>';
+                echo $xml_response;exit();
+            }
+        }
+
+        //判断事件类型
         if($event=='subscribe') {
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
@@ -84,15 +96,12 @@ class WeixinController extends Controller
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
     }
 
-
     public function kefu001($openid,$from)
     {
         // 文本消息
         $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$from.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. '您好, 现在是北京时间'. date('Y-m-d H:i:s') .'.我们现已下班......有事请拨打110、119等.]]></Content></xml>';
         echo $xml_response;
     }
-
-
 
     /**
      * 接收事件推送
@@ -210,5 +219,4 @@ class WeixinController extends Controller
         }
 
     }
-
 }
