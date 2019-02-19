@@ -150,17 +150,17 @@ class WeixinController extends Controller
                     "name"  => "百度",
                     "url"   => "https://www.baidu.com"
                 ],
-                /*[
+                [
                     "type"  => "view",      // view类型 跳转指定 URL
                     "name"  => "京东",
                     "url"   => "https://www.jd.com"
-                ]*/
+                ]
             ]
         ];
 
 
         $r = $client->request('POST',$url,[
-           'body' => json_encode($data)
+           'body' => json_encode($data,JSON_UNESCAPED_UNICODE)
         ]);
 
         //3 解析微信接口返回信息
