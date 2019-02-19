@@ -49,7 +49,6 @@ class WeixinController extends Controller
         //var_dump($xml);echo '<hr>';
 
         if($event=='subscribe') {
-            $openid = $xml->FromUserName;               //用户openid
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
 
@@ -86,7 +85,9 @@ class WeixinController extends Controller
     }
 
 
-    public function kefu001($openid,$from){
+    public function kefu001($openid,$from)
+    {
+        // 文本消息
         $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$from.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. 'Hello World, 现在时间'. date('Y-m-d H:i:s') .']]></Content></xml>';
         echo $xml_response;
     }
@@ -159,7 +160,7 @@ class WeixinController extends Controller
                     "name"  =>  "客服SK",
                     "key"   =>  "kefu001"
                 ],
-                [
+                /*[
                     "name"  =>"菜单",
                     "sub_button"    => [
                         [
@@ -188,7 +189,7 @@ class WeixinController extends Controller
                             "url"   => "https://www.tmall.com"
                         ]
                     ]
-                ]
+                ]*/
             ]
         ];
 
