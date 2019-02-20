@@ -67,7 +67,7 @@ class WeixinController extends Controller
             }elseif($xml->MsgType=='voice'){//处理语音
                 if(1){
                     $this->dlVoice($xml->MediaId);
-                    $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.Are-You-Ok. date('Y-m-d H:i:s') .']]></Content></xml>';
+                    $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'您好,请问有什么需要帮助的？？？'.date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
                 }
             }elseif($xml->MsgType=='event'){//处理事件
