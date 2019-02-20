@@ -66,8 +66,8 @@ class WeixinController extends Controller
                 }
             }elseif($xml->MsgType=='voice'){//处理语音
                 $this->dlVoice($xml->MediaId);
-               /* $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.Are-You-Ok. date('Y-m-d H:i:s') .']]></Content></xml>';
-                echo $xml_response;*/
+                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.Are-You-Ok. date('Y-m-d H:i:s') .']]></Content></xml>';
+                echo $xml_response;
             }elseif($xml->MsgType=='event'){//处理事件
                 //判断事件类型
                 if($event=='subscribe') {
