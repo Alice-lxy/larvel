@@ -18,7 +18,7 @@ class WeixinController extends Controller
 
     public function test()
     {
-        echo __METHOD__;
+       // echo __METHOD__;
         echo 'Token:'.$this->getWXAccessToken();
         //$this->getUserInfo(1);
     }
@@ -64,7 +64,11 @@ class WeixinController extends Controller
                     $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. str_random(10) . ' >>> ' . date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
                 }
-            }elseif($xml->MsgType=='event'){
+            }elseif($xml->MsgType=='voice'){//处理语音
+                $this->dlVoice($xml->MediaId);
+               /* $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.Are-You-Ok. date('Y-m-d H:i:s') .']]></Content></xml>';
+                echo $xml_response;*/
+            }elseif($xml->MsgType=='event'){//处理事件
                 //判断事件类型
                 if($event=='subscribe') {
                     $sub_time = $xml->CreateTime;               //扫码关注时间
@@ -138,11 +142,32 @@ class WeixinController extends Controller
         //保存图片
         $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
         if($r){     //保存成功
-
+            echo 111;
         }else{      //保存失败
-
+            echo 222;
         }
 
+    }
+    /** 回复语音*/
+    public function dlVoice($media_id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
+
+        $client = new GuzzleHttp\Client();
+        $response = $client->get($url);
+        //$h = $response->getHeaders();
+
+        //获取文件名
+        $file_info = $response->getHeader('Content-disposition');
+        $file_name = substr(rtrim($file_info[0],'"'),-20);
+
+        $wx_image_path = 'wx/video/'.$file_name;
+
+        $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
+        if($r){     //保存成功
+            echo 111;
+        }else{      //保存失败
+            echo 222;
+        }
     }
 
 
