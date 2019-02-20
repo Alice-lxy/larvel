@@ -162,7 +162,7 @@ class WeixinController extends Controller
         $file_info = $response->getHeader('Content-disposition');
         $file_name = substr(rtrim($file_info[0],'"'),-20);
 
-        $wx_image_path = 'wx/video/'.$file_name;
+        $wx_image_path = 'wx/voice/'.$file_name;
 
         $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
         if($r){     //保存成功
