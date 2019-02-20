@@ -64,41 +64,41 @@ class WeixinController extends Controller
                     $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. str_random(10) . ' >>> ' . date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
                 }
+            }elseif($xml->MsgType=='event'){
+                //判断事件类型
+                if($event=='subscribe') {
+                    $sub_time = $xml->CreateTime;               //扫码关注时间
+
+                    //echo 'openid: ' . $openid;echo '</br>';echo '$sub_time: ' . $sub_time;
+
+                    //获取用户信息
+                    $user_info = $this->getUserInfo($openid);
+                    //echo '<pre>';print_r($user_info);echo '</pre>';
+
+                    //保存用户信息
+                    $u = WeixinUser::where(['openid'=>$openid])->first();
+
+                    if($u){
+                        echo '此用户已存在';
+                    }else{
+                        $user_data = [
+                            'openid' => $openid,
+                            'add_time' => time(),
+                            'nickname' => $user_info['nickname'],
+                            'sex' => $user_info['sex'],
+                            'headimgurl' => $user_info['headimgurl'],
+                            'subscribe_time' => $sub_time,
+                        ];
+                        $id = WeixinUser::insertGetId($user_data);      //保存用户信息
+                        var_dump($id);
+                    }
+                }elseif($event=='CLICK'){
+                    if($xml->EventKey=="kefu001"){
+                        $this->kefu001($openid,$xml->ToUserName);
+                    }
+                }
             }
             //exit();
-        }
-
-        //判断事件类型
-        if($event=='subscribe') {
-            $sub_time = $xml->CreateTime;               //扫码关注时间
-
-            //echo 'openid: ' . $openid;echo '</br>';echo '$sub_time: ' . $sub_time;
-
-            //获取用户信息
-            $user_info = $this->getUserInfo($openid);
-            //echo '<pre>';print_r($user_info);echo '</pre>';
-
-            //保存用户信息
-            $u = WeixinUser::where(['openid'=>$openid])->first();
-
-            if($u){
-                echo '此用户已存在';
-            }else{
-                $user_data = [
-                    'openid' => $openid,
-                    'add_time' => time(),
-                    'nickname' => $user_info['nickname'],
-                    'sex' => $user_info['sex'],
-                    'headimgurl' => $user_info['headimgurl'],
-                    'subscribe_time' => $sub_time,
-                ];
-                $id = WeixinUser::insertGetId($user_data);      //保存用户信息
-                var_dump($id);
-            }
-        }elseif($event=='CLICK'){
-            if($xml->EventKey=="kefu001"){
-                $this->kefu001($openid,$xml->ToUserName);
-            }
         }
         //记录日志
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
