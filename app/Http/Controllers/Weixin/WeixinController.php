@@ -70,6 +70,12 @@ class WeixinController extends Controller
                     $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'您好,请问有什么需要帮助的？？？'.date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
                 }
+            }elseif($xml->MsgType=='video'){//处理视频
+                if(1){
+                    $this->dlVideo($xml->MediaId);
+                    $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'此视频不存在...'.date('Y-m-d H:i:s') .']]></Content></xml>';
+                    echo $xml_response;
+                }
             }elseif($xml->MsgType=='event'){//处理事件
                 //判断事件类型
                 if($event=='subscribe') {
@@ -171,7 +177,27 @@ class WeixinController extends Controller
             echo 222;
         }
     }
+    /** 视频*/
+    public function dlVideo($media_id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
 
+        $client = new GuzzleHttp\Client();
+        $response = $client->get($url);
+        //$h = $response->getHeaders();
+
+        //获取文件名
+        $file_info = $response->getHeader('Content-disposition');
+        $file_name = substr(rtrim($file_info[0],'"'),-20);
+
+        $wx_image_path = 'wx/video/'.$file_name;
+
+        $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
+        if($r){     //保存成功
+            echo 111;
+        }else{      //保存失败
+            echo 222;
+        }
+    }
 
     /**
      * 接收事件推送
