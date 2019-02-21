@@ -8,7 +8,7 @@ use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\Redis;
 
 use GuzzleHttp;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 
 class AllSendController extends Controller
@@ -44,16 +44,16 @@ class AllSendController extends Controller
     public function allSend(Request $request){
         $text = $request->input('text');
         //1 获取access_token拼接请求接口
-        $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='.$this->getWXAccessToken();
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.$this->getWXAccessToken();
         //2 请求微信接口
         $client = new GuzzleHttp\Client(['base_uri' => $url]);
 
         $data = [
             "filter" =>[
-                "is_to_all" => true,
+                "is_to_all" => true
             ],
             "text"  =>  [
-                "content"   =>  $text,
+                "content"   =>  $text
             ],
             "msgtype" =>   "text"
         ];
