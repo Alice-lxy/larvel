@@ -61,7 +61,10 @@ class WeixinController extends Controller
             if($xml->MsgType=='text'){
                 $msg = $xml->Content;
                 $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. $msg. date('Y-m-d H:i:s') .']]></Content></xml>';
-                echo $xml_response;exit();
+                echo $xml_response;
+
+
+
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片
                 if(1){  //下载图片素材
@@ -81,13 +84,25 @@ class WeixinController extends Controller
                     ];
                     $m_id = WeixinMedia::insertGetId($data);
                     var_dump($m_id);
-
                 }
             }elseif($xml->MsgType=='voice'){//处理语音
                 if(1){
-                    $this->dlVoice($xml->MediaId);
+                    $file_name = $this->dlVoice($xml->MediaId);
                     $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'您好,请问有什么需要帮助的？？？'.date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
+
+                    //写入数据库
+                    $data = [
+                        'openid'    => $openid,
+                        'add_time'  =>time(),
+                        'msg_type'  =>  'voice',
+                        'media_id'  => $xml->MediaId,
+                        'format'    => $xml->Format,
+                        'msg_id'    => $xml->MsgId,
+                        'local_file_name'   => $file_name
+                    ];
+                    $m_id = WeixinMedia::insertGetId($data);
+                    var_dump($m_id);
                 }
             }elseif($xml->MsgType=='video'){//处理视频
                 if(1){
@@ -194,6 +209,7 @@ class WeixinController extends Controller
         }else{      //保存失败
             echo 222;
         }
+        return $file_name;
     }
     /** 视频*/
     public function dlVideo($media_id){
