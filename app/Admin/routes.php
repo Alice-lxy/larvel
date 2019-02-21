@@ -17,5 +17,8 @@ Route::group([
     $router->resource('/weixin',WeixinController::class);
     $router->resource('/weixinmedia',WeixinMediaController::class);
 
+    $router->resource('/allsend',AllSendController::class);
+    $router->post('/send','AllSendController@allSend');
+
 
 });

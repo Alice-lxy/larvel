@@ -252,7 +252,6 @@ class WeixinController extends Controller
      */
     public function getWXAccessToken()
     {
-
         //获取缓存
         $token = Redis::get($this->redis_weixin_access_token);
         if(!$token){        // 无缓存 请求微信接口
