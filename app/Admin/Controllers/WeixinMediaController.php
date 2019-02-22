@@ -183,7 +183,7 @@ class WeixinMediaController extends Controller
         $d = json_decode($body,true);
         $d['file_name'] = $file_name;
         $d['add_time'] = time();
-        //echo '<pre>';print_r($d);echo '</pre>';die;
+        echo '<pre>';print_r($d);echo '</pre>';die;
         $res = WeixinForMedia::insertGetId($d);
         if($res){
             echo "success";
