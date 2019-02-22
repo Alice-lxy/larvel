@@ -18,7 +18,10 @@ Route::group([
     $router->resource('/weixinmedia',WeixinMediaController::class);
 
     $router->resource('/allsend',AllSendController::class);
-    $router->post('/send','AllSendController@allSend');
+    $router->post('/send','AllSendController@allSend');//群发
+
+    $router->get('/material','WeixinMediaController@upShow');//获取永久素材
+    $router->post('/material','WeixinMediaController@formTest');
 
 
 });
