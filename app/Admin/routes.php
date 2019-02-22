@@ -22,6 +22,6 @@ Route::group([
 
     $router->get('/material','WeixinMediaController@upShow');//获取永久素材
     $router->post('/','WeixinMediaController@formTest');
-
+    $router->resource('/weixinforver',WeixinForMediaController::class);
 
 });
