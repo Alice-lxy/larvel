@@ -192,7 +192,11 @@ class WeixinMediaController extends Controller
 
     public function upShow(Content $content)
     {
-        return view('admin.up');
+        return $content
+            ->header('Index')
+            ->description('description')
+            ->body(view('admin.up'));
+       // return view('admin.up');
     }
 
     public function formTest(Request $request)
