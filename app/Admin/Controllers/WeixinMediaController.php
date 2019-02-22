@@ -142,7 +142,6 @@ class WeixinMediaController extends Controller
         return $form;
     }
 
-
     /**
      * 获取微信AccessToken
      */
@@ -191,7 +190,7 @@ class WeixinMediaController extends Controller
     }
 
 
-    public function upShow()
+    public function upShow(Content $content)
     {
         return view('admin.up');
     }

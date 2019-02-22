@@ -3,9 +3,13 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\HasResourceActions;
+use App\Model\WeixinMedia;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Controllers\HasResourceActions;
 use Illuminate\Support\Facades\Redis;
+
+use Encore\Admin\Form;
+
 
 use GuzzleHttp;
 use Illuminate\Http\Request;
@@ -17,10 +21,28 @@ class AllSendController extends Controller
     protected $redis_weixin_access_token = 'str:weixin_access_token';     //微信 access_token
 
 
-    public function index()
+    public function index(Content $content)
     {
-        return view('admin.sendall');
+        return $content
+            ->header('微信')
+            ->description('群发')
+            ->body($this->form());
+       //return view('admin.sendall');
     }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        $form = new Form(new WeixinMedia());
+        $form->textarea('text','text');
+        return $form;
+    }
+
+
     /**
      * 获取微信AccessToken
      */
