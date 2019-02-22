@@ -178,13 +178,11 @@ class WeixinMediaController extends Controller
                 ],
             ]
         ]);
-
-
         $body = $response->getBody();
         //echo $body;echo '<hr>';
         $d = json_decode($body,true);
        // echo '<pre>';print_r($d);echo '</pre>';
-        $res = WeixinMedia::insertGetId($d);
+        $res = WeixinForMedia::insertGetId($d);
         if($res){
             echo "success";
         }else{
@@ -201,7 +199,7 @@ class WeixinMediaController extends Controller
        // return view('admin.up');
     }
     public function view(){
-        $view = new Form(new WeixinForMedia());
+        $view = new Form(new WeixinMedia());
         $view->file('media','media');
         return $view;
     }
