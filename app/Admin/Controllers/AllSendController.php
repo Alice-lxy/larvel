@@ -26,8 +26,8 @@ class AllSendController extends Controller
         return $content
             ->header('微信')
             ->description('群发')
-            ->body($this->form());
-       //return view('admin.sendall');
+            ->body(view('admin.sendall'));
+       //return ;
     }
 
     /**

@@ -4,11 +4,13 @@ namespace App\Admin\Controllers;
 
 use App\Model\WeixinMedia;
 use App\Http\Controllers\Controller;
+
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+
 use GuzzleHttp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -161,6 +163,7 @@ class WeixinMediaController extends Controller
         return $token;
 
     }
+
     /**
      * 上传素材
      */
@@ -195,8 +198,13 @@ class WeixinMediaController extends Controller
         return $content
             ->header('Index')
             ->description('description')
-            ->body(view('admin.up'));
+            ->body($this->view());
        // return view('admin.up');
+    }
+    public function view(){
+        $view = new Form(new WeixinMedia());
+        $view->file('media','media');
+        return $view;
     }
 
     public function formTest(Request $request)
