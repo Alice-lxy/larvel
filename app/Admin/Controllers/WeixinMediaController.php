@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Model\WeixinMedia;
+use App\Model\WeixinForMedia;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -200,7 +201,7 @@ class WeixinMediaController extends Controller
        // return view('admin.up');
     }
     public function view(){
-        $view = new Form(new WeixinMedia());
+        $view = new Form(new WeixinForMedia());
         $view->file('media','media');
         return $view;
     }
