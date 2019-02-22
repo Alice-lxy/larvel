@@ -182,11 +182,10 @@ class WeixinMediaController extends Controller
         //echo $body;echo '<hr>';
         $d = json_decode($body,true);
        // echo '<pre>';print_r($d);echo '</pre>';
-        if($d['errcode'] == 0){
+        if($d){
             echo "success";
         }else{
             echo "fail，请重试";echo '</br>';
-            echo $d['errmsg'];
         }
 
     }
