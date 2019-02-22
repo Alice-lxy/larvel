@@ -199,7 +199,7 @@ class WeixinMediaController extends Controller
        // return view('admin.up');
     }
     public function view(){
-        $view = new Form(new WeixinMedia());
+        $view = new Form(new WeixinForMedia());
         $view->file('media','media');
         return $view;
     }
