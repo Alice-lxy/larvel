@@ -178,13 +178,23 @@ class WeixinMediaController extends Controller
                 ],
             ]
         ]);
+
+
         $body = $response->getBody();
         //echo $body;echo '<hr>';
         $d = json_decode($body,true);
         $d['file_name'] = $file_name;
         $d['add_time'] = time();
-        echo '<pre>';print_r($d);echo '</pre>';die;
-        $res = WeixinForMedia::insertGetId($d);
+
+        $data = [
+            'file_name' => $file_name,
+            'add_time' => time(),
+            'media_id' => $d['media_id'],
+            'url' => $d['url'],
+        ];
+
+        echo '<pre>';print_r($data);echo '</pre>';
+        $res = WeixinForMedia::insertGetId($data);
         if($res){
             echo "success";
         }else{
