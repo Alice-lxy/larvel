@@ -4,13 +4,11 @@ namespace App\Admin\Controllers;
 
 use App\Model\WeixinMedia;
 use App\Http\Controllers\Controller;
-
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-
 use GuzzleHttp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -180,19 +178,19 @@ class WeixinMediaController extends Controller
             ]
         ]);
 
+
         $body = $response->getBody();
         //echo $body;echo '<hr>';
         $d = json_decode($body,true);
        // echo '<pre>';print_r($d);echo '</pre>';
-        if($d){
+        $res = WeixinMedia::insertGetId($d);
+        if($res){
             echo "success";
         }else{
             echo "fail，请重试";echo '</br>';
         }
 
     }
-
-
     public function upShow(Content $content)
     {
         return $content
@@ -206,15 +204,14 @@ class WeixinMediaController extends Controller
         $view->file('media','media');
         return $view;
     }
-
     public function formTest(Request $request)
     {
-//        echo '<pre>';print_r($_POST);echo '</pre>';echo '<hr>';
-//        echo '<pre>';print_r($_FILES);echo '</pre>';echo '<hr>';
+        echo '<pre>';print_r($_POST);echo '</pre>';echo '<hr>';
+        echo '<pre>';print_r($_FILES);echo '</pre>';echo '<hr>';
         //exit();
         //保存文件
         $img_file = $request->file('media');
-       // echo '<pre>';print_r($img_file);echo '</pre>';echo '<hr>';
+        echo '<pre>';print_r($img_file);echo '</pre>';echo '<hr>';
 
         $img_origin_name = $img_file->getClientOriginalName();//图片原始名称
        // echo 'originName: '.$img_origin_name;echo '</br>';
