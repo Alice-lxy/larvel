@@ -185,7 +185,7 @@ class WeixinMediaController extends Controller
         $d = json_decode($body,true);
         $d['file_name'] = $file_name;
         $d['add_time'] = time();
-
+        echo '<pre>';print_r($d);echo '</pre>';die;
         $data = [
             'file_name' => $file_name,
             'add_time' => time(),
@@ -243,7 +243,5 @@ class WeixinMediaController extends Controller
 
         //上传至微信永久素材
         $this->upMaterialTest($save_file_path,$new_file_name);
-
-
     }
 }
