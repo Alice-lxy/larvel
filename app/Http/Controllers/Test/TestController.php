@@ -76,5 +76,13 @@ class TestController extends Controller
 		echo __METHOD__;
 	}
 
-
+	/*
+	 *聊天 */
+	public function view(){
+		if(empty($_POST)){
+			return view('test.test');
+		}else{
+			print_r($_POST);echo '<br/>';
+		}
+	}
 }
