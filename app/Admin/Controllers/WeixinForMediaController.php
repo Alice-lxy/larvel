@@ -82,10 +82,13 @@ class WeixinForMediaController extends Controller
         $grid = new Grid(new WeixinForMedia);
 
         $grid->id('Id');
-        $grid->add_time('Add time');
         $grid->media_id('Media id');
+        $grid->file_name('File name')->display(function($file_name){
+            return '<img src="https://lxy.qianqianya.xyz/form_test/'.$file_name.'" width=50px;>';
+        });
         $grid->url('Url');
-        $grid->file_name('File name');
+        $grid->add_time('Add time');
+
 
         return $grid;
     }
