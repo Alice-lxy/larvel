@@ -213,6 +213,7 @@ class WeixinController extends Controller
         }
     }
 
+    /** 数据替换*/
     public function newmessage(Request $request){
         $openid = $request->input('openid');
         $info = WeixinUser::where(['openid'=>$openid])->first();
