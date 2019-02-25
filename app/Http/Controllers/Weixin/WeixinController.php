@@ -71,6 +71,7 @@ class WeixinController extends Controller
                     'message'   => $msg,
                 ];
                 $info = WeixinMessage::insertGetId($data);
+                var_dump($info);
                 
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片

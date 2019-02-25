@@ -26,5 +26,6 @@ Route::group([
 
     $router->get('/chat','WeixinController@chat');
     $router->post('/weixinchart','WeixinController@dochat');
+    $router->post('/message','WeixinController@newmessage');
 
 });
