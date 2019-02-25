@@ -36,6 +36,8 @@
                         if(msg=='success'){
                             $('#kefu').append('<p>'+text+':客服</p>');
                             $('#text').val('');
+                        }else{
+                            alert('时间已超过48小时,您无法主动与用户进行联系');
                         }
                     }
             );
