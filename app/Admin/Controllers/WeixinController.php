@@ -222,8 +222,14 @@ class WeixinController extends Controller
         $arr['name'] = $name;
         $arr['data'] = $data;
         echo json_encode($arr);
-
-
+    }
+    /**
+     * 刷新access_token
+     */
+    public function refreshToken()
+    {
+        Redis::del($this->redis_weixin_access_token);
+        echo $this->getWXAccessToken();
     }
 
 
