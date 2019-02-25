@@ -356,4 +356,13 @@ class WeixinController extends Controller
         }
 
     }
+
+    /**
+     * 刷新access_token
+     */
+    public function refreshToken()
+    {
+        Redis::del($this->redis_weixin_access_token);
+        echo $this->getWXAccessToken();
+    }
 }
