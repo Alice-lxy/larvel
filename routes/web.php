@@ -105,8 +105,14 @@ Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 Route::get('/weixin/create_menu','Weixin\WeixinController@createMenu');
 
 //群聊
+
 Route::get('/fasong','Test\TestController@view');
 Route::post('/fasong','Test\TestController@view');
+
+Route::get('/fasong','Test\TestController@chat');
+Route::post('/fasong','Test\TestController@dochat');
+
+
 
 Auth::routes();
 
