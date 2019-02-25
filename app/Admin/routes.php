@@ -24,4 +24,7 @@ Route::group([
     $router->post('/','WeixinMediaController@formTest');
     $router->resource('/weixinforver',WeixinForMediaController::class);
 
+    $router->get('/chat','WeixinController@chat');
+    $router->post('/weixinchart','WeixinController@dochat');
+
 });

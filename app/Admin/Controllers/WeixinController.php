@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Model\WeixinMessage;
 use App\Model\WeixinUser;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -9,6 +10,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Symfony\Component\HttpFoundation\Request;
 
 class WeixinController extends Controller
 {
@@ -16,7 +18,6 @@ class WeixinController extends Controller
 
     /**
      * Index interface.
-     *
      * @param Content $content
      * @return Content
      */
@@ -103,7 +104,9 @@ class WeixinController extends Controller
 
         $grid->id('Id');
         $grid->uid('Uid');
-        $grid->openid('Openid');
+        $grid->openid('Openid')->display(function($url){
+            return '<a href="chat?openid='.$url.'"> '.$url.' </a>';
+        });
         $grid->add_time('Add time');
         $grid->nickname('Nickname');
         $grid->sex('Sex');
@@ -137,32 +140,39 @@ class WeixinController extends Controller
         return $show;
     }
 
-    /**
-     * 消息群发
-     */
-    /*public function sendMsgView(Content $content)
-    {
-        //return view('admin.weixin.send_msg');
+    /** 私聊*/
+    public function chat(Content $content){
+        $openid = $_GET['openid'];
+       // print_r($openid);exit;
+        $info = WeixinUser::where(['openid'=>$openid])->first();
+        //print_r($info);die;
+
+        $message_info = WeixinMessage::where(['openid'=>$openid])->get();
+
+        $data = [
+            'headimgurl' => $info['headimgurl'],
+            'openid' => $info['openid'],
+            'nickname' => $info['nickname'],
+            'info' => $message_info,
+        ];
+       // print_r($data);die;
 
         return $content
-            ->header('微信')
-            ->description('群发消息')
-            ->body(view('admin.weixin.send_msg'));
-    }*/
+            ->header($info['nickname'])
+            ->description('私聊')
+            ->body(view('admin.chat',$data));
+    }
+    public function dochat(Request $request){
+        $text = $request->input('text');
+        $openid = $request->input('openid');
+        /*$data = [
+            'message'   =>  $text,
+            'openid'    =>$openid,
+            'add_time'  => time()
+        ];*/
 
 
-    /**
-     *
-     */
-    /*public function sendMsg()
-    {
-        //获取用户openid
-        $list = WeixinUser::all()->pluck('openid')->take(10)->toArray();
 
+    }
 
-        //群发消息
-
-        echo '<pre>';print_r($list);echo '</pre>';
-        echo '<pre>';print_r($_POST);echo '</pre>';
-    }*/
 }

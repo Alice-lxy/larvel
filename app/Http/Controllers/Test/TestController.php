@@ -76,5 +76,12 @@ class TestController extends Controller
 		echo __METHOD__;
 	}
 
-
+	/*
+	*群聊*/
+	public function chat(){
+		return view('test.chat');
+	}
+	public function dochat(){
+		echo __METHOD__;
+	}
 }

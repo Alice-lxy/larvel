@@ -104,6 +104,11 @@ Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 //创建菜单
 Route::get('/weixin/create_menu','Weixin\WeixinController@createMenu');
 
+//群聊
+Route::get('/fasong','Test\TestController@chat');
+Route::post('/fasong','Test\TestController@dochat');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
