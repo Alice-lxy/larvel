@@ -103,6 +103,7 @@ Route::post('/weixin/valid1','Weixin\WeixinController@wxEvent');        //接收
 Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 //创建菜单
 Route::get('/weixin/create_menu','Weixin\WeixinController@createMenu');
+Route::get('/weixin/refresh','Weixin\WeixinController@refreshToken');//刷新access_token
 
 //群聊
 Route::get('/fasong','Test\TestController@chat');
