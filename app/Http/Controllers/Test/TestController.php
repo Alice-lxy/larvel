@@ -76,22 +76,19 @@ class TestController extends Controller
 		echo __METHOD__;
 	}
 
-	/*
-<<<<<<< HEAD
-	 *聊天 */
+	/* *聊天 */
 	public function view(){
 		if(empty($_POST)){
 			return view('test.test');
 		}else{
 			print_r($_POST);echo '<br/>';
 		}
-=======
-	*群聊*/
+
 	public function chat(){
 		return view('test.chat');
 	}
 	public function dochat(){
 		echo __METHOD__;
->>>>>>> weixin_user
+
 	}
 }
