@@ -11,11 +11,9 @@ class PayController extends Controller
     public $weixin_unifiedorder_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
     public $weixin_notify_url = 'https://lxy.qianqianya.xyz/weixin/pay/notice';     //支付通知回调
 
-    public function test(){
-        echo __METHOD__;echo '<br/>';
+    public function test($order_number){
+       // echo __METHOD__;echo '<br/>';
         $total_fee = 1;     //用户需要支付的总金额
-        $order_number = Order::generateOrderSN();
-        //print_r($order_number);die;
 
         $orderInfo = [
             'appid' =>  env('WEIXIN_APPID_0'),      //公众账号ID
@@ -48,11 +46,19 @@ class PayController extends Controller
 //		echo 'result_code: '.$data->result_code;echo '<br>';
 //		echo 'prepay_id: '.$data->prepay_id;echo '<br>';
 //		echo 'trade_type: '.$data->trade_type;echo '<br>';
-        echo 'code_url: '.$data->code_url;echo '<br>';
-//        die;
-        //echo '<pre>';print_r($data);echo '</pre>';
+//        echo 'code_url: '.$data->code_url;echo '<br>';
 
+        $code_url = $data->code_url;
+
+       //return view('order/pay',['code_url'=>$code_url]);
+        $url = base64_encode($code_url);
+        header("Refresh:0;url='/view/$url'");
+        //echo '<pre>';print_r($data);echo '</pre>';
         //将 code_url 返回给前端，前端生成 支付二维码
+    }
+    public function url($url){
+        $cd_url = base64_decode($url);
+        return view('order/pay',['cd_url'=>$cd_url]);
     }
     protected function ToXml()
     {
@@ -178,7 +184,4 @@ class PayController extends Controller
         echo $response;
 
     }
-
-
-
 }
