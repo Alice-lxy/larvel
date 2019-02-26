@@ -104,6 +104,10 @@ Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 //创建菜单
 Route::get('/weixin/create_menu','Weixin\WeixinController@createMenu');
 Route::get('/weixin/refresh','Weixin\WeixinController@refreshToken');//刷新access_token
+//微信支付
+Route::get('/weixin/notice/test','Weixin\PayController@test');
+Route::post('/weixin/pay/notice','Weixin\PayController@notice');
+
 
 //群聊
 

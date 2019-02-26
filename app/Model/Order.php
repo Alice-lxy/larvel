@@ -16,7 +16,7 @@ class Order extends Model
      */
     public static function generateOrderSN()
     {
-        return date('Ymdhis') . rand(11111,99999) . rand(2222,9999);
+        return 'xiangzi'.date('Ymdhis') . rand(11111,99999) . rand(2222,9999);
     }
 
 }
