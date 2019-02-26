@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class PayController extends Controller
 {
     public $weixin_unifiedorder_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
-    public $weixin_notify_url = 'http://lxy.qianqianya.xyz/weixin/pay/notice';     //支付通知回调
+    public $weixin_notify_url = 'https://lxy.qianqianya.xyz/weixin/pay/notice';     //支付通知回调
 
     public function test(){
         echo __METHOD__;echo '<br/>';
