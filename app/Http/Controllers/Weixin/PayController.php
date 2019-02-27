@@ -66,9 +66,9 @@ class PayController extends Controller
         $order_number = $request->input('order_number');
         $res = Order::where(['order_number'=>$order_number])->first();
         if($res['order_status']==2){
-            echo '1';
+            echo 1;
         }else{
-            echo '2';
+            echo 2;
         }
     }
     public function last(){
