@@ -186,7 +186,6 @@ class PayController extends Controller
                 $data = [
                     'pay_time'  =>  time(),
                     'order_status'  => 2,
-                    'is_delete' => 2,
                     'plat_oid'  => $xml->transaction_id,
                     'plat'  =>  2,
                 ];

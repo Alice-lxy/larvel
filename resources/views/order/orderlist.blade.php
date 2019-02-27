@@ -23,7 +23,7 @@
                         <a href="/order/del/{{$v['order_number']}}">取消订单</a>
                     @elseif($v['order_status']==2)
                         <a href="javascript:;">查看物流</a>  ||
-                        <a href="/order/del/{{$v['order_number']}}">联系客服</a>
+                        <a href="javascript:;">联系客服</a>
                     @endif
                 </td>
             </tr>
