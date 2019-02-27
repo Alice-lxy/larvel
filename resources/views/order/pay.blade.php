@@ -22,7 +22,9 @@
                     "/weixin/success",
                     {order_number:order_number},
                     function(msg){
-                        location.href='/weixin/success';
+                        if(msg=='支付成功'){
+                            alert('支付成功');
+                        }
                     }
             );
         }
