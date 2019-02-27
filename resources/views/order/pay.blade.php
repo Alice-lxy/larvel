@@ -22,8 +22,8 @@
                     "/weixin/success",
                     {order_number:order_number},
                     function(msg){
-                        if(msg=='支付成功'){
-                            alert('支付成功');
+                        if(msg==1){
+                            localtion.href='/weixin/success/aaa';
                         }
                     }
             );

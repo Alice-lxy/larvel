@@ -66,10 +66,13 @@ class PayController extends Controller
         $order_number = $request->input('order_number');
         $res = Order::where(['order_number'=>$order_number])->first();
         if($res['order_status']==2){
-            echo '支付成功';
+            echo '1';
         }else{
-            echo '支付失败';
+            echo '2';
         }
+    }
+    public function aaa(){
+        echo '支付成功';
     }
     protected function ToXml()
     {
@@ -183,7 +186,7 @@ class PayController extends Controller
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
-                $id = $xml->out_trade_no;
+                $id = $xml['out_trade_no'];
                 $data = [
                     'pay_time'  =>  time(),
                     'order_status'  => 2,
@@ -210,7 +213,7 @@ class PayController extends Controller
         $this->values = [];
         $this->values = $xml;
         $sign =  $this->SetSign();
-        if($sign==$xml->sign){
+        if($sign==$xml['sign']){
             return true;
         }else{
             return false;
