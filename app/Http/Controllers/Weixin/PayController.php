@@ -67,6 +67,8 @@ class PayController extends Controller
         $res = Order::where(['order_number'=>$order_number])->first();
         if($res['order_status']==2){
             echo '支付成功';
+        }else{
+            echo '支付失败';
         }
     }
     protected function ToXml()
