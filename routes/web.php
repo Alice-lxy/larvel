@@ -109,8 +109,7 @@ Route::get('/weixin/notice/test/{order_number}','Weixin\PayController@test');
 Route::get('/view/{url}','Weixin\PayController@url');//二维码
 Route::post('/weixin/pay/notice','Weixin\PayController@notice');//微信通知回调
 Route::post('/weixin/success','Weixin\PayController@success');
-
-Route::post('/weixin/success/aaa','Weixin\PayController@last');
+Route::get('/weixin/success/aaa','Weixin\PayController@last');
 
 
 
