@@ -175,9 +175,9 @@ class PayController extends Controller
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_pay_notice.log',$log_str,FILE_APPEND);
 
-        $xml = simplexml_load_string($data);
+        $xml = (array)simplexml_load_string($data,'SimpleXMLElement',LIBXML_NOCDATA);
 
-        if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
+        if($xml['result_code']=='SUCCESS' && $xml['return_code']=='SUCCESS'){      //微信支付成功回调
             //验证签名
             $sign = $this->signsuccess($xml);
 
@@ -209,7 +209,7 @@ class PayController extends Controller
     public function signsuccess($xml){
         $this->values = [];
         $this->values = $xml;
-       $sign =  $this->SetSign();
+        $sign =  $this->SetSign();
         if($sign==$xml->sign){
             return true;
         }else{
