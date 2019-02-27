@@ -180,7 +180,16 @@ class PayController extends Controller
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
-                
+                $order_number = $_COOKIE['order_number'];
+                $data = [
+                    'pay_time'  =>  time(),
+                    'order_status'  => 2,
+                    'is_delete' => 2,
+                    'plat_oid'  => $xml->transaction_id,
+                    'plat'  =>  2,
+                ];
+                $res = Order::where(['order_number'=>$order_number])->update($data);
+                var_dump($res);
 
             }else{
                 //TODO 验签失败
