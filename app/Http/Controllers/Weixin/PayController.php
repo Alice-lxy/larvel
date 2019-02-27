@@ -180,7 +180,7 @@ class PayController extends Controller
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
-                $order_number = $_COOKIE['order_number'];
+                $id = $xml->out_trade_no;
                 $data = [
                     'pay_time'  =>  time(),
                     'order_status'  => 2,
@@ -188,7 +188,7 @@ class PayController extends Controller
                     'plat_oid'  => $xml->transaction_id,
                     'plat'  =>  2,
                 ];
-                $res = Order::where(['order_number'=>$order_number])->update($data);
+                $res = Order::where(['order_number'=>$id])->update($data);
                 var_dump($res);
 
             }else{
