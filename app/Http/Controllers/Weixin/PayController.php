@@ -71,7 +71,7 @@ class PayController extends Controller
             echo '2';
         }
     }
-    public function aaa(){
+    public function last(){
         echo '支付成功';
     }
     protected function ToXml()
@@ -190,7 +190,7 @@ class PayController extends Controller
                 $data = [
                     'pay_time'  =>  time(),
                     'order_status'  => 2,
-                    'plat_oid'  => $xml->transaction_id,
+                    'plat_oid'  => $xml['transaction_id'],
                     'plat'  =>  2,
                 ];
                 $res = Order::where(['order_number'=>$id])->update($data);
