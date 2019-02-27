@@ -147,6 +147,7 @@ class PayController extends Controller
         $result = strtoupper($string);
         return $result;
     }
+
     /**
      * 格式化参数格式化成url参数
      */
@@ -178,7 +179,7 @@ class PayController extends Controller
 
         if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
             //验证签名
-            $sign = true;
+            $sign = $this->signsuccess($xml);
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
@@ -203,5 +204,16 @@ class PayController extends Controller
         $response = '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
         echo $response;
 
+    }
+    //验签
+    public function signsuccess($xml){
+        $this->values = [];
+        $this->values = $xml;
+       $sign =  $this->SetSign();
+        if($sign==$xml->sign){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
