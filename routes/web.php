@@ -106,8 +106,9 @@ Route::get('/weixin/create_menu','Weixin\WeixinController@createMenu');
 Route::get('/weixin/refresh','Weixin\WeixinController@refreshToken');//刷新access_token
 //微信支付
 Route::get('/weixin/notice/test/{order_number}','Weixin\PayController@test');
-Route::get('/view/{url}','Weixin\PayController@url');
-Route::post('/weixin/pay/notice','Weixin\PayController@notice');
+Route::get('/view/{url}','Weixin\PayController@url');//二维码
+Route::post('/weixin/pay/notice','Weixin\PayController@notice');//微信通知回调
+Route::post('/weixin/success','Weixin\PayController@success');
 
 
 //群聊

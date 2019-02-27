@@ -14,7 +14,8 @@ class PayController extends Controller
     public function test($order_number){
        // echo __METHOD__;echo '<br/>';
         $total_fee = 1;     //用户需要支付的总金额
-
+        //订单号
+        setcookie('order_number',$order_number,time()+3600,'/','',false,true);
         $orderInfo = [
             'appid' =>  env('WEIXIN_APPID_0'),      //公众账号ID
             'mch_id'=> env('WEIXIN_MCH_ID'),        //商户号
@@ -49,7 +50,6 @@ class PayController extends Controller
 //        echo 'code_url: '.$data->code_url;echo '<br>';
 
         $code_url = $data->code_url;
-
        //return view('order/pay',['code_url'=>$code_url]);
         $url = base64_encode($code_url);
         header("Refresh:0;url='/view/$url'");
@@ -58,7 +58,16 @@ class PayController extends Controller
     }
     public function url($url){
         $cd_url = base64_decode($url);
-        return view('order/pay',['cd_url'=>$cd_url]);
+        $order_number = $_COOKIE['order_number'];
+        return view('order/pay',['cd_url'=>$cd_url,'order_number'=>$order_number]);
+    }
+    //支付成功
+    public function success(Request $request){
+        $order_number = $request->input('order_number');
+        $res = Order::where(['order_number'=>$order_number])->first();
+        if($res['order_status']==2){
+            echo '支付成功';
+        }
     }
     protected function ToXml()
     {
@@ -171,6 +180,7 @@ class PayController extends Controller
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
+                
 
             }else{
                 //TODO 验签失败
