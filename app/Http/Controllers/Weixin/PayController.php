@@ -21,7 +21,7 @@ class PayController extends Controller
             'mch_id'=> env('WEIXIN_MCH_ID'),        //商户号
             'nonce_str' => str_random(16),
             'sign_type' =>  'MD5',                  //签名类型
-            'body'  =>  '测试订单-'.mt_rand(1111,9999).str_random(6),   //商品描述
+            'body'  =>  '测试',   //商品描述
             'out_trade_no'  => $order_number,
             'total_fee' => $total_fee,
             'spbill_create_ip'  => $_SERVER['REMOTE_ADDR'],     //客户端IP
@@ -37,8 +37,8 @@ class PayController extends Controller
         $rs = $this->postXmlCurl($xml, $this->weixin_unifiedorder_url, $useCert = false, $second = 30);
 
         $data =  simplexml_load_string($rs);
-//        //var_dump($data);echo '<hr>';
-//        echo 'return_code: '.$data->return_code;echo '<br>';
+//      var_dump($data);echo '<hr>';
+//      echo 'return_code: '.$data->return_code;echo '<br>';
 //		echo 'return_msg: '.$data->return_msg;echo '<br>';
 //		echo 'appid: '.$data->appid;echo '<br>';
 //		echo 'mch_id: '.$data->mch_id;echo '<br>';
@@ -48,6 +48,7 @@ class PayController extends Controller
 //		echo 'prepay_id: '.$data->prepay_id;echo '<br>';
 //		echo 'trade_type: '.$data->trade_type;echo '<br>';
 //        echo 'code_url: '.$data->code_url;echo '<br>';
+//        echo 'err_code_des: '.$data->err_code_des;echo '<br>';
 
         $code_url = $data->code_url;
        //return view('order/pay',['code_url'=>$code_url]);
