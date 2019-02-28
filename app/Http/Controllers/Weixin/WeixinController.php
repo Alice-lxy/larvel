@@ -406,8 +406,9 @@ class WeixinController extends Controller
         $unionid =  $user_arr['unionid'];
         $res = WeixinUser::where(['unionid'=>$unionid])->first();
         if($res){
-            echo 'ok';
+            echo '登录成功';
         }else{
+            //+
             $data = [
               'name'    => $user_arr['nickname'],
             ];
@@ -422,14 +423,15 @@ class WeixinController extends Controller
                     'headimgurl'    => $user_arr['headimgurl'],
                     'unionid'   =>  $unionid
                 ];
-                var_dump($newdata);
-                $arr = WeixinUser::insertGetId($newdata);
-                print_r($arr);
+                //var_dump($newdata);
+                $res = WeixinUser::insertGetId($newdata);
+                //print_r($arr);
+                if($res){
+                    echo '登录成功';
+                }else{
+                    echo '登录失败';
+                }
             }
-
         }
-
     }
-
-
 }
