@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use App\Model\UserModel;
 use App\Model\WeixinMedia;
 use App\Model\WeixinMessage;
 use App\Model\WeixinUser;
@@ -404,7 +405,17 @@ class WeixinController extends Controller
     public function info($user_arr){
         $unionid =  $user_arr['unionid'];
         $res = WeixinUser::where(['unionid'=>$unionid])->first()->toArray();
-        print_r($res);
+        if($res){
+            echo 'ok';
+        }else{
+            $data = [
+              'name'    => $user_arr['nickname'],
+            ];
+            $res = UserModel::insertGetId($data);
+            print_r($res);
+
+        }
+
     }
 
 
