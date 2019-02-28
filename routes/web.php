@@ -112,7 +112,7 @@ Route::post('/weixin/success','Weixin\PayController@success');
 Route::get('/weixin/success/aaa','Weixin\PayController@last');
 //微信登录
 Route::get('/weixin/login','Weixin\WeixinController@login');
-Route::get('/weixin/code','Weixin\WeixinController@code');
+Route::get('/weixin/getcode','Weixin\WeixinController@code');
 
 
 
