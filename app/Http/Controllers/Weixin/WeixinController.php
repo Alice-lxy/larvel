@@ -365,4 +365,21 @@ class WeixinController extends Controller
         Redis::del($this->redis_weixin_access_token);
         echo $this->getWXAccessToken();
     }
+
+    /*
+     * 微信登录
+     * */
+    public function login(){
+        //echo __METHOD__;
+        return view('weixin.login');
+    }
+    /*
+     * 接受code*/
+    public function code(){
+        echo __METHOD__;
+        print_r($_GET);echo '<hr/>';
+        print_r($_POST);echo '<hr/>';
+    }
+
+
 }
