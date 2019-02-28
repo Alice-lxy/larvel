@@ -115,7 +115,6 @@ Route::get('/weixin/login','Weixin\WeixinController@login');
 Route::get('/weixin/getcode','Weixin\WeixinController@code');
 
 
-
 //群聊
 
 Route::get('/fasong','Test\TestController@view');
