@@ -398,7 +398,7 @@ class WeixinController extends Controller
         $user_arr = json_decode($user_json,true);
         echo '<hr>';
         echo '<pre>';print_r($user_arr);echo '</pre>';
-        $this->info($user_arr);
+        return $this->info($user_arr);
 
     }
     public function info($user_arr){
