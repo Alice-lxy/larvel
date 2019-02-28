@@ -403,8 +403,8 @@ class WeixinController extends Controller
     }
     public function info($user_arr){
         $unionid =  $user_arr['unionid'];
-        $res = WeixinUser::where(['unionid'=>$unionid])->first();
-        print_r($res);die;
+        $res = WeixinUser::where(['unionid'=>$unionid])->first()->toArray();
+        print_r($res);
     }
 
 
