@@ -411,10 +411,10 @@ class WeixinController extends Controller
             $data = [
               'name'    => $user_arr['nickname'],
             ];
-            $res = UserModel::insertGetId($data);
-            if($res){
+            $id = UserModel::insertGetId($data);
+            if($id){
                 $newdata = [
-                    'uid'   => $res['id'],
+                    'uid'   => $id,
                     'openid'    => $user_arr['openid'],
                     'add_time'  =>time(),
                     'nickname'  =>  $user_arr['nickname'],
