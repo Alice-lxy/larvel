@@ -459,6 +459,7 @@ class WeixinController extends Controller
         //print_r($url);die;
         $ticket = $this->getJsapiTicket();
         $str = 'jsapi_ticket='.$ticket.'&noncestr='.$param['noncestr'].'&timestamp='.$param['timestamp'].'&url='.$url;
+       // var_dump($str);die;
         $signature = sha1($str);
         return $signature;
     }
@@ -469,7 +470,7 @@ class WeixinController extends Controller
         $ticket = Redis::get($this->redis_weixin_jsapi_ticket);
         if(!$ticket){
             //无缓存
-            $url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->redis_weixin_access_token.'&type=jsapi';
+            $url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->getWXAccessToken().'&type=jsapi';
             $ticket_info = file_get_contents($url);
             $ticket_arr = json_decode($ticket_info,true);
 
@@ -477,7 +478,6 @@ class WeixinController extends Controller
                 $ticket = $ticket_arr['ticket'];
                 Redis::set($this->redis_weixin_jsapi_ticket,$ticket);
                 Redis::setTimeout($this->redis_weixin_jsapi_ticket,3600);
-
             }
         }
         return $ticket;
