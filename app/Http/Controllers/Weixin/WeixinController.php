@@ -440,7 +440,7 @@ class WeixinController extends Controller
     public function jssdk(){
         //echo __METHOD__;
         $jsconfig = [
-            'appid' =>  env('WEIXIN_APPID_0'),
+            'appid' =>  env('WEIXIN_APPID'),
             'timestamp' => time(),
             'noncestr'  => str_random(10),
 //            'sign'  =>  $this->wxJsConfigSign()
@@ -468,6 +468,7 @@ class WeixinController extends Controller
     public function getJsapiTicket(){
         //是否有缓存
         $ticket = Redis::get($this->redis_weixin_jsapi_ticket);
+        //echo $ticket;die;
         if(!$ticket){
             //无缓存
             $url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->getWXAccessToken().'&type=jsapi';
