@@ -4,7 +4,7 @@
 @endsection
 
 <script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>
-<script src="{{URL::asset('http://res2.wx.qq.com/open/js/jweixin-1.4.0.js')}}"></script>
+<script src="{{URL::asset('https://res2.wx.qq.com/open/js/jweixin-1.4.0.js')}}"></script>
 <script>
     $(function(){
         wx.config({
