@@ -18,6 +18,7 @@ class WeixinController extends Controller
     //
 
     protected $redis_weixin_access_token = 'str:weixin_access_token';     //微信 access_token
+    protected $redis_weixin_jsapi_ticket = 'str:weixin_jsapi_ticket';       //微信 jsapi
 
     public function test()
     {
@@ -442,16 +443,45 @@ class WeixinController extends Controller
             'appid' =>  env('WEIXIN_APPID_0'),
             'timestamp' => time(),
             'noncestr'  => str_random(10),
-            'sign'  =>  $this->wxJsConfigSign()
+//            'sign'  =>  $this->wxJsConfigSign()
         ];
+        $sign = $this->wxJsConfigSign($jsconfig);
+        $jsconfig['sign'] = $sign;
         $data = [
             'jsconfig'  => $jsconfig
         ];
         return view('weixin.jssdk',$data);
     }
-    public function wxJsConfigSign(){
-        $sign = str_random(15);
-        return $sign;
+    /*
+     * 计算JSSDK sign*/
+    public function wxJsConfigSign($param){
+        $url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; //域名/路由
+        //print_r($url);die;
+        $ticket = $this->getJsapiTicket();
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$param['noncestr'].'&timestamp='.$param['timestamp'].'&url='.$url;
+        $signature = sha1($str);
+        return $signature;
     }
+    /*
+     * 获取jsapi_ticket*/
+    public function getJsapiTicket(){
+        //是否有缓存
+        $ticket = Redis::get($this->redis_weixin_jsapi_ticket);
+        if(!$ticket){
+            //无缓存
+            $url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->redis_weixin_access_token.'&type=jsapi';
+            $ticket_info = file_get_contents($url);
+            $ticket_arr = json_decode($ticket_info,true);
+
+            if(isset($ticket_arr['ticket'])){
+                $ticket = $ticket_arr['ticket'];
+                Redis::set($this->redis_weixin_jsapi_ticket,$ticket);
+                Redis::setTimeout($this->redis_weixin_jsapi_ticket,3600);
+
+            }
+        }
+        return $ticket;
+    }
+
 
 }
