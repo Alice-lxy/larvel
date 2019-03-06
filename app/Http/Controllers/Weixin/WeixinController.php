@@ -53,7 +53,6 @@ class WeixinController extends Controller
         //记录日志
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
-        var_dump($xml);die;
 
         $event = $xml->Event;                       //事件类型
         $openid = $xml->FromUserName;
