@@ -134,9 +134,7 @@ class WeixinController extends Controller
                     //保存用户信息
                     $u = WeixinUser::where(['openid'=>$openid])->first();
 
-                    if($u){
-                        echo '此用户已存在';
-                    }else{
+                    if(!$u){
                         $user_data = [
                             'openid' => $openid,
                             'add_time' => time(),
@@ -145,8 +143,7 @@ class WeixinController extends Controller
                             'headimgurl' => $user_info['headimgurl'],
                             'subscribe_time' => $sub_time,
                         ];
-                        $id = WeixinUser::insertGetId($user_data);      //保存用户信息
-                        var_dump($id);
+                        WeixinUser::insertGetId($user_data);      //保存用户信息
                     }
                 }elseif($event=='CLICK'){
                     if($xml->EventKey=="kefu001"){
