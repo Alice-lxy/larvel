@@ -124,16 +124,12 @@ class WeixinController extends Controller
                 //判断事件类型
                 if($event=='subscribe') {
                     $sub_time = $xml->CreateTime;               //扫码关注时间
-
                     //echo 'openid: ' . $openid;echo '</br>';echo '$sub_time: ' . $sub_time;
-
                     //获取用户信息
                     $user_info = $this->getUserInfo($openid);
                     //echo '<pre>';print_r($user_info);echo '</pre>';
-
                     //保存用户信息
                     $u = WeixinUser::where(['openid'=>$openid])->first();
-
                     if(!$u){
                         $user_data = [
                             'openid' => $openid,
@@ -145,6 +141,9 @@ class WeixinController extends Controller
                         ];
                         WeixinUser::insertGetId($user_data);      //保存用户信息
                     }
+                    $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'欢迎进入此公众号'.date('Y-m-d H:i:s') .']]></Content></xml>';
+                    echo $xml_response;
+
                 }elseif($event=='CLICK'){
                     if($xml->EventKey=="kefu001"){
                         $this->kefu001($openid,$xml->ToUserName);
