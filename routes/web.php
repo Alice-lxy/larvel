@@ -125,7 +125,8 @@ Route::post('/fasong','Test\TestController@view');
 Route::get('/fasong','Test\TestController@chat');
 Route::post('/fasong','Test\TestController@dochat');
 
-
+//接口测试
+Route::any('/curl/test1','Api\ApiController@test1');
 
 Auth::routes();
 

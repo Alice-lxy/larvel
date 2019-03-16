@@ -21,6 +21,7 @@ class VerifyCsrfToken extends Middleware
 
         '/admin/weixinchart',
         '/admin/message',
+        '/curl/*',
 
     ];
 }
