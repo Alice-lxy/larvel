@@ -128,6 +128,7 @@ Route::post('/fasong','Test\TestController@dochat');
 //接口测试
 Route::any('/curl/test1','Api\ApiController@test1');
 Route::any('/curl/int','Api\ApiController@int');
+Route::post('/curl/openssl','Api\ApiController@openssl');
 
 
 Auth::routes();

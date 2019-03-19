@@ -77,18 +77,19 @@ class TestController extends Controller
 	}
 
 	/* *聊天 */
-	public function view(){
-		if(empty($_POST)){
+	public function view()
+	{
+		if (empty($_POST)) {
 			return view('test.test');
-		}else{
-			print_r($_POST);echo '<br/>';
+		} else {
+			print_r($_POST);
+			echo '<br/>';
 		}
-
+	}
 	public function chat(){
 		return view('test.chat');
 	}
 	public function dochat(){
 		echo __METHOD__;
-
 	}
-}
+	}

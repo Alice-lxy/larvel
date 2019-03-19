@@ -7,19 +7,32 @@ use App\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
-    //
+    //接口测试
     public function test1(){
         /*echo '<pre>';print_r($_POST);echo '</pre>';
         echo '<pre>';print_r($_GET);echo '</pre>';
         echo '<pre>';print_r($_FILES);echo '</pre>';*/
         return view('api.test');
     }
+    //
     public function int(){
-//      echo '<pre>';print_r($_POST);echo '</pre>';
+      echo '<pre>';print_r($_POST);echo '</pre>';
         $data = $_POST['post_data'];
         $iv = $_POST['iv'];
         $key = $_POST['key'];
         $method = $_POST['method'];
+        //验签
+        $sign = base64_decode($_POST['sign']);
+        //echo $sign;
+        //加载公钥
+        $pub_key = openssl_pkey_get_public(file_get_contents('./key/openssl_pub.key'));
+        //验签
+        $verify = openssl_verify($data,$sign,$pub_key,OPENSSL_ALGO_SHA1);
+//        var_dump($verify);echo '<br/>';
+        if($verify){
+            echo '验签success';echo '<br/>';
+        }
+
         //解密
         $info = base64_decode($data);
         $dec_str = openssl_decrypt($info,$method,$key,OPENSSL_RAW_DATA,$iv);
@@ -46,6 +59,25 @@ class ApiController extends Controller
                 'new_str'=> base64_encode($new_str),
             ];
             echo json_encode($arr);
+        }
+    }
+    //验签
+    public function openssl(){
+       // echo '<pre>';print_r($_POST);echo '</pre>';
+        $sign = base64_decode($_POST['sign']);
+        $openssl_data = 'this is a test';
+        //加载公钥
+        $pub_key = openssl_pkey_get_public(file_get_contents('./key/openssl_pub.key'));
+        //print_r(file_get_contents('./key/openssl_pub.key'));
+       // var_dump($pub_key);
+        //生成摘要
+        $digestAlgo = 'sha512';
+        $digest = openssl_digest($openssl_data,$digestAlgo);
+        //验签
+        $verify = openssl_verify($digest,$sign,$pub_key,OPENSSL_ALGO_SHA1);
+        if($verify){
+            //error
+            echo 'success';
         }
     }
 }
