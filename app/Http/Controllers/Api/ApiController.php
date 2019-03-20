@@ -92,14 +92,34 @@ class ApiController extends Controller
     }
     //login
     public function login(){
-        echo md5('12138');
+//        echo md5('12138');
         return view('api.login');
     }
     public function dologin(){
-        echo '<pre>';print_r($_POST);echo '</pre>';//_token  name  pwd
+        //echo '<pre>';print_r($_POST);echo '</pre>';//_token  name  pwd
         $name = $_POST['name'];
-        $pwd = $_POST['pwd'];
-        $data = ApiUser::where(['name'=>$name])->first()->toArray();
-        print_r($data);die;
+        $pwd = md5($_POST['pwd']);
+        //echo $pwd;die;
+        $data = ApiUser::where(['name'=>$name])->first();
+        //print_r($data);die;
+        if(!$data){
+            $data = [
+                'error' =>  504,
+                'msg'   =>  '此用户不存在!'
+            ];
+        }else{
+            if($pwd!=$data['pwd']){
+                $data = [
+                    'error' => 500,
+                    'msg'   =>  '用户名或密码错误'
+                ];
+            }else{
+                $data = [
+                    'error' => 200,
+                    'mag'   =>  'ok'
+                ];
+            }
+        }
+        return $data;
     }
 }

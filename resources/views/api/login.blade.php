@@ -6,7 +6,7 @@
 </head>
 <body>
     <form action="/curl/dologin" method="post" style="width: 600px; margin-left: 230px;">
-       {{-- {{csrf_field()}}--}}
+        {{csrf_field()}}
         <h2 class="form-signin-heading" style="padding-left: 160px;">User Login</h2>
         <div class="form-group" style="padding-bottom: 15px;">
             <label for="exampleInputEmail1">NickName</label>
