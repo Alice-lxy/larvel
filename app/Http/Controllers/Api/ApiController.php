@@ -80,4 +80,10 @@ class ApiController extends Controller
             echo 'success';
         }
     }
+
+    //HBuilder 接口测试
+    public function hb(){
+        echo 111;
+        echo '<pre>';print_r($_POST);echo '</pre>';
+    }
 }
