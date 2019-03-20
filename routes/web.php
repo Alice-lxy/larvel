@@ -131,6 +131,7 @@ Route::any('/curl/int','Api\ApiController@int');
 Route::post('/curl/openssl','Api\ApiController@openssl');
 
 Route::post('/curl/hd','Api\ApiController@hb');
+Route::post('/curl/login','Api\ApiController@login');
 
 
 Auth::routes();
