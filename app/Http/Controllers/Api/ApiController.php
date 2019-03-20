@@ -85,8 +85,16 @@ class ApiController extends Controller
     public function hb(){
         echo json_encode($_POST);
     }
-
+    //reg
+    public function reg(){
+        return view('api.reg');
+    }
+    //login
     public function login(){
+        return view('api.login');
+    }
+    public function dologin(){
         echo 111;
+        echo '<pre>';print_r($_POST);echo '</pre>';
     }
 }
