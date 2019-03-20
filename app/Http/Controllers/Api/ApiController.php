@@ -84,6 +84,6 @@ class ApiController extends Controller
     //HBuilder 接口测试
     public function hb(){
         echo 111;
-        echo '<pre>';print_r($_POST);echo '</pre>';
+        echo '<pre>';echo json_encode($_POST);echo '</pre>';
     }
 }
