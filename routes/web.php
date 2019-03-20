@@ -131,6 +131,9 @@ Route::any('/curl/int','Api\ApiController@int');
 Route::post('/curl/openssl','Api\ApiController@openssl');
 
 Route::post('/curl/hd','Api\ApiController@hb');
+
+Route::get('/curl/reg','Api\ApiController@reg');
+
 Route::get('/curl/login','Api\ApiController@login');
 Route::post('/curl/dologin','Api\ApiController@dologin');
 

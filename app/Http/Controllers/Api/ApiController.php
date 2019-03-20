@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\ApiUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -91,10 +92,14 @@ class ApiController extends Controller
     }
     //login
     public function login(){
+        echo md5('12138');
         return view('api.login');
     }
     public function dologin(){
-        echo 111;
-        echo '<pre>';print_r($_POST);echo '</pre>';
+        echo '<pre>';print_r($_POST);echo '</pre>';//_token  name  pwd
+        $name = $_POST['name'];
+        $pwd = $_POST['pwd'];
+        $data = ApiUser::where(['name'=>$name])->first()->toArray();
+        print_r($data);die;
     }
 }
