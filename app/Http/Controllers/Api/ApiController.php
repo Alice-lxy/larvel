@@ -88,7 +88,7 @@ class ApiController extends Controller
     }
 
     public function login(){
-        echo '<pre>';print_r($_POST);echo '</pre>';die;//_token  name  pwd
+       echo json_encode($_POST);die;
         $name = $_POST['name'];
         $pwd = md5($_POST['pwd']);
         //echo $pwd;die;
