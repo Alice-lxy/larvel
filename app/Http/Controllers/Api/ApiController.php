@@ -86,17 +86,9 @@ class ApiController extends Controller
     public function hb(){
         echo json_encode($_POST);
     }
-    //reg
-    public function reg(){
-        return view('api.reg');
-    }
-    //login
+
     public function login(){
-//        echo md5('12138');
-        return view('api.login');
-    }
-    public function dologin(){
-        //echo '<pre>';print_r($_POST);echo '</pre>';//_token  name  pwd
+        echo '<pre>';print_r($_POST);echo '</pre>';echo '</hr>';//_token  name  pwd
         $name = $_POST['name'];
         $pwd = md5($_POST['pwd']);
         //echo $pwd;die;
