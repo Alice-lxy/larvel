@@ -39,6 +39,9 @@ class IndexController extends Controller
         $cart_goods = CartModel::where(['uid'=>$this->uid])->get()->toArray();
 //        print_r($cart_goods);exit;
         if(empty($cart_goods)){
+            //$uri = Request::getRequestUri();
+            //print_r($uri);
+            //die;
             header("refresh:3;url='/goods'");
             exit('cart 空空如也...正在进入商品页面...');
         }else{
@@ -49,8 +52,10 @@ class IndexController extends Controller
                 $list[] = $goods_info;
             }
         }
+        $login = $request->get('login');
         $arr = [
             'arr' => $list,
+            'login' => $login
         ];
         return view('cart.cartlist',$arr);
     }
@@ -165,5 +170,8 @@ class IndexController extends Controller
             echo 'fail';
         }
     }
+
+
+
 
 }

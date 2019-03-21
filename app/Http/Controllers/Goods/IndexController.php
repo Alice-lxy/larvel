@@ -10,11 +10,12 @@ class IndexController extends Controller
 {
 
     //全商品展示
-    public function index()
+    public function index(Request $request)
     {
+       $login = $request->get('login');
         $arr = Goods::all()->toArray();
 //        print_r($arr);exit;
-        return view('goods.list',['arr'=>$arr]);
+        return view('goods.list',['arr'=>$arr,'login'=>$login]);
     }
     /** 商品详情*/
     public function detail($goods_id){
@@ -48,4 +49,6 @@ class IndexController extends Controller
             echo 'successly';
         }
     }
+
+
 }

@@ -51,12 +51,12 @@ Route::any('/test/abc','Test\TestController@abc');
 Route::get('/view/child','Test\TestController@viewChild');
 
 /** 注册*/
-Route::get('/userreg','User\UserController@reg');
-Route::post('/userreg','User\UserController@doReg');
+/*Route::get('/userreg','User\UserController@reg');
+Route::post('/userreg','User\UserController@doReg');*/
 /** 登录*/
-Route::get('/userlogin','User\UserController@login');
+/*Route::get('/userlogin','User\UserController@login');
 Route::post('/userlogin','User\UserController@doLogin');
-Route::get('/usercenter','User\UserController@center')->middleware('check.login');//
+Route::get('/usercenter','User\UserController@center')->middleware('check.login');//*/
 /** 退出*/
 Route::get('/userquit','User\UserController@quit');
 

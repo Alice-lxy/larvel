@@ -10,7 +10,6 @@ use App\Model\UserModel;
 class UserController extends Controller
 {
     //
-
 	public function user($uid)
 	{
 		echo $uid;
