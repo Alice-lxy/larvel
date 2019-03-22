@@ -49,8 +49,6 @@
                         <li><a href="http://passport.larvel.com/userreg">注册</a></li>
                         <li><a href="http://passport.larvel.com/userlogin">登录</a></li>
                     @endif{{--?rediret={{$current_url}}--}}
-
-
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
