@@ -88,7 +88,7 @@ class ApiController extends Controller
     }
 
     public function login(){
-       //echo json_encode($_POST);die;
+       echo json_encode($_POST);die;
         $name = $_POST['name'];
         $pwd = $_POST['pwd'];
         $data = [
@@ -104,10 +104,10 @@ class ApiController extends Controller
         curl_setopt($ch,CURLOPT_POST,1);
         curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
 
-        $res = curl_close($ch);
+        $res = curl_exec($ch);
         print_r($res);
+        curl_close($ch);
 
-        curl_exec($ch);
 
 
 
