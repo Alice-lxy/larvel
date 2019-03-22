@@ -96,7 +96,7 @@ class ApiController extends Controller
             'pwd'   =>  $pwd
         ];
 
-        $url = "http://pslxy.miao629.com/user/login";
+        $url = "http://pslxy.miao629.com/userlogin";
 
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
