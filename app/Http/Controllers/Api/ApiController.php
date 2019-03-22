@@ -110,7 +110,7 @@ class ApiController extends Controller
         curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
 
         $res = curl_exec($ch);
-        //print_r($res);
+        print_r($res);
         curl_close($ch);
 
         //echo $pwd;die;
