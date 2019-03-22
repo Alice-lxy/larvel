@@ -91,12 +91,14 @@ class ApiController extends Controller
      *
      */
     public function login(){
-       echo json_encode($_POST);die;
+       //echo json_encode($_POST);die;
         $name = $_POST['name'];
         $pwd = $_POST['pwd'];
+        $type = $_POST['type'];
         $data = [
             'name'  => $name,
-            'pwd'   =>  $pwd
+            'pwd'   =>  $pwd,
+            'type'  => $type
         ];
 
         $url = "http://pslxy.miao629.com/user/login";
