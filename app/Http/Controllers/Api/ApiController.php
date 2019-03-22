@@ -94,11 +94,11 @@ class ApiController extends Controller
        //echo json_encode($_POST);die;
         $name = $_POST['name'];
         $pwd = $_POST['pwd'];
-        $type = $_POST['type'];
+       // $type = $_POST['type'];
         $data = [
             'name'  => $name,
             'pwd'   => $pwd,
-            'type'  => $type
+//            'type'  => $type
         ];
 
         $url = "http://pslxy.miao629.com/user/login";
