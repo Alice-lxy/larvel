@@ -88,7 +88,7 @@ class ApiController extends Controller
     }
 
     /**
-     *
+     *接口API
      */
     public function login(){
        //echo json_encode($_POST);die;
@@ -97,7 +97,7 @@ class ApiController extends Controller
         $type = $_POST['type'];
         $data = [
             'name'  => $name,
-            'pwd'   =>  $pwd,
+            'pwd'   => $pwd,
             'type'  => $type
         ];
 
@@ -112,10 +112,6 @@ class ApiController extends Controller
         $res = curl_exec($ch);
         //print_r($res);
         curl_close($ch);
-
-
-
-
 
         //echo $pwd;die;
         //$data = ApiUser::where(['name'=>$name])->first();
@@ -137,8 +133,8 @@ class ApiController extends Controller
                     'mag'   =>  'ok'
                 ];
             }
-        }*/
-        echo json_encode($data);
+        }
+        echo json_encode($data);*/
 
 
 

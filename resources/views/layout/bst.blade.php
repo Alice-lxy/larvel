@@ -43,7 +43,7 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                    @if($login==1)
+                    @if($login!=1)
                         <li><a href="/userquit">退出</a></li>
                     @else
                         <li><a href="http://passport.larvel.com/userreg">注册</a></li>
