@@ -44,7 +44,7 @@
                         </ul>
                     </li>
                     @if($login==1)
-                        <li><a href="http://pslxy.miao629.com/userquit">退出</a></li>
+                        <li><a href="/userquit">退出</a></li>
                     @else
                         <li><a href="http://pslxy.miao629.com/userreg">注册</a></li>
                         <li><a href="http://pslxy.miao629.com/userlogin">登录</a></li>
