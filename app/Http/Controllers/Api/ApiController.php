@@ -87,6 +87,9 @@ class ApiController extends Controller
         echo json_encode($_POST);
     }
 
+    /**
+     *
+     */
     public function login(){
        //echo json_encode($_POST);die;
         $name = $_POST['name'];
@@ -96,7 +99,7 @@ class ApiController extends Controller
             'pwd'   =>  $pwd
         ];
 
-        $url = "http://pslxy.miao629.com/userlogin";
+        $url = "http://pslxy.miao629.com/user/login";
 
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
