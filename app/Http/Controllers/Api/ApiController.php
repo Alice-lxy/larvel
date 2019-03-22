@@ -90,11 +90,32 @@ class ApiController extends Controller
     public function login(){
        //echo json_encode($_POST);die;
         $name = $_POST['name'];
-        $pwd = md5($_POST['pwd']);
+        $pwd = $_POST['pwd'];
+        $data = [
+            'name'  => $name,
+            'pwd'   =>  $pwd
+        ];
+
+        $url = "http://pslxy.miao629.com/userlogin";
+
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+
+        $res = curl_close($ch);
+        print_r($res);
+
+        curl_exec($ch);
+
+
+
+
         //echo $pwd;die;
-        $data = ApiUser::where(['name'=>$name])->first();
+        //$data = ApiUser::where(['name'=>$name])->first();
         //print_r($data);die;
-        if(!$data){
+        /*if(!$data){
             $data = [
                 'error' =>  504,
                 'msg'   =>  '此用户不存在!'
@@ -111,7 +132,10 @@ class ApiController extends Controller
                     'mag'   =>  'ok'
                 ];
             }
-        }
+        }*/
         echo json_encode($data);
+
+
+
     }
 }
