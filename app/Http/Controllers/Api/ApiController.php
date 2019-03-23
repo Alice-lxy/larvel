@@ -107,10 +107,11 @@ class ApiController extends Controller
         curl_setopt($ch,CURLOPT_POST,1);
         curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
 
+
         $res = curl_exec($ch);
         return $res;
        // print_r($res);
-        curl_close($ch);
+
 
         //echo $pwd;die;
         //$data = ApiUser::where(['name'=>$name])->first();
