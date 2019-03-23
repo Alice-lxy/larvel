@@ -110,11 +110,11 @@ class ApiController extends Controller
 
         $res = curl_exec($ch);
 
-        var_dump(json_decode($res,true));
+        var_dump(json_decode($res['token'],true));
         echo '<br>';
-        var_dump(json_encode($res));
+        var_dump(json_encode($res['token']));
         echo '<br>';
-        var_dump($res);
+        var_dump($res['token']);
        // print_r($res);
 
 
