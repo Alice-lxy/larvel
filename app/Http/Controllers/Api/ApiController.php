@@ -142,6 +142,24 @@ class ApiController extends Controller
 
     }
     public function token(){
-        echo json_encode($_POST);
+//        echo json_encode($_POST);
+        $token = $_POST['token'];
+        $id = $_POST['id'];
+        $data = [
+            'token' => $token,
+            'id'    =>  $id
+        ];
+        $url = "http://pslxy.miao629.com/user/token";
+
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+        $res = curl_exec($ch);
+        return $res;
+
     }
 }
