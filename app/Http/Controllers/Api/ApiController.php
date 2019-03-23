@@ -110,8 +110,7 @@ class ApiController extends Controller
 
         $res = curl_exec($ch);
 
-         $data=json_encode($res);
-         var_dump(json_decode($data));
+        return json_encode($res);
        // print_r($res);
 
 
