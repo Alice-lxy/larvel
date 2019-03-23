@@ -141,4 +141,7 @@ class ApiController extends Controller
 
 
     }
+    public function token(){
+        echo json_encode($_POST);
+    }
 }
