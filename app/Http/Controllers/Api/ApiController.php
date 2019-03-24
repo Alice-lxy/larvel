@@ -160,6 +160,19 @@ class ApiController extends Controller
 
         $res = curl_exec($ch);
         return $res;
+    }
+    public function quit(){
+        $id = $_POST['id'];
+        $url = "http://pslxy.miao629.com/user/quit";
 
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,['id'=>$id]);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+        $arr = curl_exec($ch);
+        return $arr;
     }
 }

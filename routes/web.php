@@ -135,6 +135,7 @@ Route::post('/curl/hd','Api\ApiController@hb');
 //login
 Route::post('/curl/login','Api\ApiController@login');
 Route::post('/curl/token','Api\ApiController@token');
+Route::post('/curl/quit','Api\ApiController@quit');
 
 //Route::get('/','User\IndexController@index');
 
