@@ -162,15 +162,19 @@ class ApiController extends Controller
         return $res;
     }
     public function quit(){
+        //print_r($_POST);die;
         $id = $_POST['id'];
+        $data = [
+            'id'    =>  $id
+        ];
         $url = "http://pslxy.miao629.com/user/quit";
 
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_HEADER,0);
-        curl_setopt($ch,CURLOPT_POST,1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,['id'=>$id]);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_URL,$url);//路由
+        curl_setopt($ch,CURLOPT_HEADER,0);//头信息
+        curl_setopt($ch,CURLOPT_POST,1);//post方式
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);//发送数据
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);//转化成json形式
 
         $arr = curl_exec($ch);
         return $arr;
