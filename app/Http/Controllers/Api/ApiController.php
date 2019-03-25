@@ -162,7 +162,7 @@ class ApiController extends Controller
         return $res;
     }
     public function quit(){
-        //print_r($_POST);die;
+        print_r($_POST);die;
         $id = $_POST['id'];
         $data = [
             'id'    =>  $id
