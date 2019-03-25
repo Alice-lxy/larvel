@@ -90,6 +90,26 @@ class ApiController extends Controller
     /**
      *接口API
      */
+    public function reg(){
+        $name = $_POST['name'];
+        $pwd = $_POST['pwd'];
+        $email = $_POST['email'];
+        $data = [
+            'name'  =>  $name,
+            'pwd'   =>  $pwd,
+            'email' =>  $email
+        ];
+        $ch = curl_init();
+        $url = 'http://pslxy.miao629.com/user/reg';
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        $res = curl_exec($ch);
+        return $res;
+
+    }
     public function login(){
        //echo json_encode($_POST);die;
         $name = $_POST['name'];
