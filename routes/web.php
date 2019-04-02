@@ -132,6 +132,13 @@ Route::post('/curl/openssl','Api\ApiController@openssl');
 
 Route::post('/curl/hd','Api\ApiController@hb');
 
+//exam login
+Route::post('/exam/login','Exam\IndexController@login');
+Route::get('/exam/test','Exam\IndexController@test');
+
+
+
+
 //login
 Route::post('/curl/reg','Api\ApiController@reg');
 Route::post('/curl/login','Api\ApiController@login');
