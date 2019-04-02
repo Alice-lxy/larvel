@@ -56,9 +56,9 @@ class IndexController extends Controller
         $redis_token_key = "str:exam_key_token".$uid;
         $new_token = Redis::get($redis_token_key);
         if($token==$new_token){
-            return 1;
+            echo json_encode(1);
         }else{
-            return 2;
+            echo json_encode(2);
         }
     }
 
