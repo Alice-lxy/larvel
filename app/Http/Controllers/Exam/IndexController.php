@@ -22,8 +22,8 @@ class IndexController extends Controller
 
                 $id = $res['id'];
                 $redis_token_key = "str:exam_key_token".$id;
-                Redis::set($redis_token_key,$token);
-                $last_time = Redis::expire($redis_token_key,3600);
+                Redis::set($redis_token_key,$token);//存
+                $last_time = Redis::expire($redis_token_key,3600);//过期时间 1小时
                 //$a = Redis::ttl($redis_token_key);
 
                 $response = [
