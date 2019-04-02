@@ -11,8 +11,8 @@ class IndexController extends Controller
     //login
     public function login(){
         $username = $_POST['username'];
-        $password = $_POST['password'];
-        $res = HBModel::where(['name'=>$username])->first()->toArray();
+        $password = md5($_POST['password']);
+        $res = HBModel::where(['name'=>$username])->first();
         if($res){
             //todo 有用户
             if($res['password']==$password){
