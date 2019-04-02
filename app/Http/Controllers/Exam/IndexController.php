@@ -24,7 +24,7 @@ class IndexController extends Controller
                 $redis_token_key = "str:exam_key_token".$id;
                 Redis::set($redis_token_key,$token);
                 $last_time = Redis::expire($redis_token_key,300);
-
+                //print_r(Redis::get($last_time));
                 $response = [
                     'error' =>  0,
                     'msg'   =>  'ok',
@@ -48,7 +48,9 @@ class IndexController extends Controller
         }
         echo json_encode($response);
     }
-    public function test(){
-        echo __METHOD__;
+    /*用户列表展示*/
+    public function userlist(){
+        $arr = HBModel::get()->toArray();
+        echo json_encode($arr);
     }
 }
