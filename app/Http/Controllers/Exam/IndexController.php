@@ -48,9 +48,24 @@ class IndexController extends Controller
         }
         echo json_encode($response);
     }
+    //获取token
+    public function token(){
+        $token = $_POST['token'];
+        $uid = $_POST['uid'];
+        $redis_token_key = "str:exam_key_token".$uid;
+        $new_token = Redis::get($redis_token_key);
+        if($token==$new_token){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+
     /*用户列表展示*/
     public function userlist(){
         $arr = HBModel::get()->toArray();
+
         echo json_encode($arr);
     }
 }
