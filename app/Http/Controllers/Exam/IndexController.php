@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exam;
 use App\Model\HBModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -18,10 +19,17 @@ class IndexController extends Controller
             if($res['password']==$password){
                 //ok
                 $token = substr(md5(time().rand(111,999)),5,10);
+
+                $id = $res['id'];
+                $redis_token_key = "str:exam_key_token".$id;
+                Redis::set($redis_token_key,$token);
+                $last_time = Redis::expire($redis_token_key,300);
+
                 $response = [
                     'error' =>  0,
                     'msg'   =>  'ok',
-                    'uid'   =>  $res['id'],
+                    'uid'   =>  $id,
+                    'time'  =>  $last_time,
                     'token' =>  $token
                 ];
             }else{
