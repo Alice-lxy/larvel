@@ -135,6 +135,7 @@ Route::post('/curl/hd','Api\ApiController@hb');
 //exam login
 Route::post('/exam/login','Exam\IndexController@login');
 Route::post('/exam/userlist','Exam\IndexController@userlist');
+Route::post('/exam/token','Exam\IndexController@token');
 
 
 
