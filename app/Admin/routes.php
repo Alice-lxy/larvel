@@ -29,4 +29,6 @@ Route::group([
     $router->post('/message','WeixinController@newmessage');
     $router->get('/test','WeixinController@refreshToken');
 
+    $router->resource('/exam',ExamController::class);
+
 });

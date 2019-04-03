@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Exam;
 
+use App\Model\Exam;
 use App\Model\HBModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
+    //B卷
     //login
     public function login(){
         $username = $_POST['username'];
@@ -22,15 +24,15 @@ class IndexController extends Controller
 
                 $id = $res['id'];
                 $redis_token_key = "str:exam_key_token".$id;
+                Redis::del($redis_token_key);
                 Redis::set($redis_token_key,$token);//存
-                $last_time = Redis::expire($redis_token_key,3600);//过期时间 1小时
+                Redis::expire($redis_token_key,3600);//过期时间 1小时
                 //$a = Redis::ttl($redis_token_key);
 
                 $response = [
                     'error' =>  0,
                     'msg'   =>  'ok',
                     'uid'   =>  $id,
-                    'time'  =>  $last_time,
                     'token' =>  $token
                 ];
             }else{
@@ -68,5 +70,37 @@ class IndexController extends Controller
         $arr = HBModel::get()->toArray();
 
         echo json_encode($arr);
+    }
+
+    //A卷
+    public function apply(){
+        return view('exam.apply');
+    }
+    public function applylist(){
+        $name = $_POST['name'];
+        $card = $_POST['card'];
+        $pic = $_FILES['picture'];
+        $picture = $pic['tmp_name'];
+        $api = $_POST['api'];
+        $info = Exam::where(['card'=> $card])->first();
+        if($info){
+            $num = $info['app_num'];
+            //print_r($num);
+            $new_num = $num+1;
+            $arr = Exam::where(['card'=>$card])->update(['app_num'=>$new_num]);
+        }else{
+            $data = [
+                'name'  =>  $name,
+                'card'  =>  $card,
+                'picture'   =>  $picture,
+                'api'   =>  $api
+            ];
+            $arr =Exam::insertGetId($data);
+        }
+        if($arr){
+            return view('exam.wait');
+        }else{
+            exit('申请失败');
+        }
     }
 }

@@ -136,6 +136,8 @@ Route::post('/curl/hd','Api\ApiController@hb');
 Route::post('/exam/login','Exam\IndexController@login');
 Route::post('/exam/userlist','Exam\IndexController@userlist');
 Route::post('/exam/token','Exam\IndexController@token');
+Route::get('/exam/apply','Exam\IndexController@apply');
+Route::post('/exam/apply','Exam\IndexController@applylist');
 
 
 
