@@ -55,7 +55,7 @@ class IndexController extends Controller
         ];
         return view('exam.center',$data);
     }
-    public function pcCenter(){
+    public function pcToken(){
         $token = $_POST['token'];
         $id = $_POST['uid'];
         $redis_pc_token_key = "str:pc_key_token".$id;
