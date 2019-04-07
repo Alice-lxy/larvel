@@ -22,7 +22,17 @@ class IndexController extends Controller
        // echo $name.$password;die;
         $arr = HBModel::where(['name'=>$username])->first();
         if($arr){
+            if($password==$arr['password']){
+                $token = substr(md5(time().rand(111,999)),5,10);
 
+                $id = $arr['id'];
+                $redis_pc_token_key = "str:pc_key_token".$id;
+                Redis::del($redis_pc_token_key);
+                Redis::set($redis_pc_token_key,$token);//存
+                Redis::expire($redis_pc_token_key,3600);//过期时间 1小时
+            }else{
+                exit('please try again');
+            }
         }else{
             exit('account not found');
         }
