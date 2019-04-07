@@ -53,7 +53,7 @@ class IndexController extends Controller
             'id'    =>  $id,
             'token' =>  $token
         ];
-        return view('exam.center',$data);
+        return view('exam.center',['data'=>$data]);
     }
     //手机端login
     public function login(){
