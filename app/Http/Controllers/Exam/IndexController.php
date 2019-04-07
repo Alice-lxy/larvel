@@ -11,7 +11,23 @@ use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
     //B卷
-    //login
+    //电脑端
+    public function loginlist(){
+//        echo __METHOD__;DIE
+        return view('exam.login');
+    }
+    public function doLogin(){
+        $username = $_POST['username'];
+        $password =md5($_POST['pwd']);
+       // echo $name.$password;die;
+        $arr = HBModel::where(['name'=>$username])->first();
+        if($arr){
+
+        }else{
+            exit('account not found');
+        }
+    }
+    //手机端login
     public function login(){
         $username = $_POST['username'];
         $password = md5($_POST['password']);

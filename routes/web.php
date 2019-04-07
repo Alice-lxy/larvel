@@ -133,9 +133,14 @@ Route::post('/curl/openssl','Api\ApiController@openssl');
 Route::post('/curl/hd','Api\ApiController@hb');
 
 //exam login
+//电脑端
+Route::get('/pc/login','Exam\IndexController@loginlist');
+Route::post('/pc/login','Exam\IndexController@doLogin');
+//手机端
 Route::post('/exam/login','Exam\IndexController@login');
-Route::post('/exam/userlist','Exam\IndexController@userlist');
 Route::post('/exam/token','Exam\IndexController@token');
+Route::post('/exam/userlist','Exam\IndexController@userlist');
+
 Route::get('/exam/apply','Exam\IndexController@apply');
 Route::post('/exam/apply','Exam\IndexController@applylist');
 
