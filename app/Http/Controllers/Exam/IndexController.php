@@ -47,11 +47,13 @@ class IndexController extends Controller
         if(empty($_COOKIE['id'])){
             exit('请先登录');
         }
-        die;
-        $redis_pc_token_key = "str:pc_key_token";
-
-
-        return view('exam.center');
+        $id = $_COOKIE['id'];
+        $token = $_COOKIE['token'];
+        $data = [
+            'id'    =>  $id,
+            'token' =>  $token
+        ];
+        return view('exam.center',$data);
     }
     //手机端login
     public function login(){
