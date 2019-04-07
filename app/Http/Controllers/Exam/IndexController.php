@@ -56,7 +56,15 @@ class IndexController extends Controller
         return view('exam.center',$data);
     }
     public function pcCenter(){
-        print_r($_POST);
+        $token = $_POST['token'];
+        $id = $_POST['uid'];
+        $redis_pc_token_key = "str:pc_key_token".$id;
+        $new_token = Redis::get($redis_pc_token_key);
+        if($token==$new_token){
+            return 1;
+        }else{
+            return 2;
+        }
     }
     //手机端login
     public function login(){
