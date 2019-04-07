@@ -26,11 +26,15 @@ class IndexController extends Controller
                 $token = substr(md5(time().rand(111,999)),5,10);
 
                 $id = $arr['id'];
+                setcookie('id',$id,time()+86400,'/','larvel.com',false,true);
+                setcookie('token',$token,time()+86400,'/','',false,true);
+
                 $redis_pc_token_key = "str:pc_key_token".$id;
                 Redis::del($redis_pc_token_key);
                 Redis::set($redis_pc_token_key,$token);//存
                 Redis::expire($redis_pc_token_key,3600);//过期时间 1小时
                 echo 'ok';
+
                 header("refresh:1;'/pc/center'");
             }else{
                 exit('please try again');
@@ -40,6 +44,11 @@ class IndexController extends Controller
         }
     }
     public function center(){
+        $id = $_COOKIE['id'];
+        echo $id;die;
+        $redis_pc_token_key = "str:pc_key_token";
+
+
         return view('exam.center');
     }
     //手机端login
