@@ -26,7 +26,7 @@ class IndexController extends Controller
                 $token = substr(md5(time().rand(111,999)),5,10);
 
                 $id = $arr['id'];
-                setcookie('id',$id,time()+86400,'/','larvel.com',false,true);
+                setcookie('id',$id,time()+86400,'/','lxy.qianqianya.xyz',false,true);
                 setcookie('token',$token,time()+86400,'/','',false,true);
 
                 $redis_pc_token_key = "str:pc_key_token".$id;
