@@ -30,12 +30,17 @@ class IndexController extends Controller
                 Redis::del($redis_pc_token_key);
                 Redis::set($redis_pc_token_key,$token);//存
                 Redis::expire($redis_pc_token_key,3600);//过期时间 1小时
+                echo 'ok';
+                header("refresh:1;'/pc/center'");
             }else{
                 exit('please try again');
             }
         }else{
             exit('account not found');
         }
+    }
+    public function center(){
+        return view('exam.center');
     }
     //手机端login
     public function login(){
