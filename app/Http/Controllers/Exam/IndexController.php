@@ -50,7 +50,7 @@ class IndexController extends Controller
         $id = $_COOKIE['id'];
         $token = $_COOKIE['token'];
         $data = [
-            'id'    =>  $id,
+            'uid'    =>  $id,
             'token' =>  $token
         ];
         return view('exam.center',$data);
