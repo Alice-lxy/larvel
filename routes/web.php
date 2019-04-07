@@ -137,6 +137,7 @@ Route::post('/curl/hd','Api\ApiController@hb');
 Route::get('/pc/login','Exam\IndexController@loginlist');
 Route::post('/pc/login','Exam\IndexController@doLogin');
 Route::get('pc/center','Exam\IndexController@center');
+Route::post('pc/token','Exam\IndexController@pcCenter');
 //手机端
 Route::post('/exam/login','Exam\IndexController@login');
 Route::post('/exam/token','Exam\IndexController@token');

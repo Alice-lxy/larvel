@@ -55,6 +55,9 @@ class IndexController extends Controller
         ];
         return view('exam.center',$data);
     }
+    public function pcCenter(){
+        print_r($_POST);
+    }
     //手机端login
     public function login(){
         $username = $_POST['username'];
