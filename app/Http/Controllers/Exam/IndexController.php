@@ -45,6 +45,10 @@ class IndexController extends Controller
     }
     public function center(){
         $id = $_COOKIE['id'];
+        $token = $_COOKIE['token'];
+        if(empty($id)){
+            exit('请先登录');
+        }
         echo $id;die;
         $redis_pc_token_key = "str:pc_key_token";
 
