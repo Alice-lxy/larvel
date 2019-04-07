@@ -18,7 +18,7 @@
                         //alert(data)
                         if(data==2){
                             alert('此账号已有其他用户登录');
-                            window.location.href='login.html'
+                            location.href='/pc/login'
                         }
                     }
             );
