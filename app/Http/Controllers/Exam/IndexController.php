@@ -26,11 +26,11 @@ class IndexController extends Controller
             //判断手机是否登录
             if($status==3){
                 if($arr['status']==1){
-                    HBModel::where(['name'=>$username])->updata(['status'=>4]);
+                    HBModel::where(['name'=>$username])->update(['status'=>4]);
                 }elseif($arr['status']==2){
-                    HBModel::where(['name'=>$username])->updata(['status'=>5]);
+                    HBModel::where(['name'=>$username])->update(['status'=>5]);
                 }elseif($arr['status']==0){
-                    HBModel::where(['name'=>$username])->updata(['status'=>1]);
+                    HBModel::where(['name'=>$username])->update(['status'=>1]);
                 }
             }
             if($password==$arr['password']){
@@ -88,9 +88,9 @@ class IndexController extends Controller
             //判断电脑是否登录
             if($status==1){
                 if($res['status']==3){
-                    HBModel::where(['name'=>$username])->updata(['status'=>4]);
+                    HBModel::where(['name'=>$username])->update(['status'=>4]);
                 }elseif($res['status']==2){
-                    HBModel::where(['name'=>$username])->updata(['status'=>1]);
+                    HBModel::where(['name'=>$username])->update(['status'=>1]);
                 }
             }
 
