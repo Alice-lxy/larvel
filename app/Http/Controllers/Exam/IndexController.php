@@ -30,7 +30,7 @@ class IndexController extends Controller
                 }elseif($arr['status']==2){
                     HBModel::where(['name'=>$username])->update(['status'=>5]);
                 }elseif($arr['status']==0){
-                    HBModel::where(['name'=>$username])->update(['status'=>1]);
+                    HBModel::where(['name'=>$username])->update(['status'=>3]);
                 }
             }
             if($password==$arr['password']){
@@ -90,6 +90,8 @@ class IndexController extends Controller
                 if($res['status']==3){
                     HBModel::where(['name'=>$username])->update(['status'=>4]);
                 }elseif($res['status']==2){
+                    HBModel::where(['name'=>$username])->update(['status'=>1]);
+                }elseif($res['status']==0){
                     HBModel::where(['name'=>$username])->update(['status'=>1]);
                 }
             }
