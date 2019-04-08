@@ -18,10 +18,21 @@ class IndexController extends Controller
     }
     public function doLogin(){
         $username = $_POST['username'];
+        $status = $_POST['status'];
         $password =md5($_POST['pwd']);
        // echo $name.$password;die;
         $arr = HBModel::where(['name'=>$username])->first();
         if($arr){
+            //判断手机是否登录
+            if($status==3){
+                if($arr['status']==1){
+                    HBModel::where(['name'=>$username])->updata(['status'=>4]);
+                }elseif($arr['status']==2){
+                    HBModel::where(['name'=>$username])->updata(['status'=>5]);
+                }elseif($arr['status']==0){
+                    HBModel::where(['name'=>$username])->updata(['status'=>1]);
+                }
+            }
             if($password==$arr['password']){
                 $token = substr(md5(time().rand(111,999)),5,10);
 
@@ -70,9 +81,20 @@ class IndexController extends Controller
     public function login(){
         $username = $_POST['username'];
         $password = md5($_POST['password']);
+        $status = $_POST['status'];
         $res = HBModel::where(['name'=>$username])->first();
         if($res){
             //todo 有用户
+            //判断电脑是否登录
+            if($status==1){
+                if($res['status']==3){
+                    HBModel::where(['name'=>$username])->updata(['status'=>4]);
+                }elseif($res['status']==2){
+                    HBModel::where(['name'=>$username])->updata(['status'=>1]);
+                }
+            }
+
+
             if($res['password']==$password){
                 //ok
                 $token = substr(md5(time().rand(111,999)),5,10);
@@ -118,6 +140,23 @@ class IndexController extends Controller
             echo json_encode(2);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*用户列表展示*/

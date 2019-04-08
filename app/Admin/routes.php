@@ -30,5 +30,6 @@ Route::group([
     $router->get('/test','WeixinController@refreshToken');
 
     $router->resource('/exam',ExamController::class);
+    $router->resource('/hb/user',HBUserController::class);
 
 });
